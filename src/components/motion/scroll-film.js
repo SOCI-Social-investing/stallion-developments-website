@@ -15,7 +15,8 @@ gsap.registerPlugin(ScrollTrigger);
 document.querySelectorAll("[data-scroll-film]").forEach((root) => initScrollFilm(root, JSON.parse(root.dataset.config)));
 
 function initScrollFilm(root, cfg) {
-  const { ground, radius, headerOffset } = cfg;
+  const { radius, headerOffset } = cfg;
+  const ground = cfg.ground || getComputedStyle(document.body).backgroundColor;   // the card sits on the page ground
 
   /* ——— Film sources + timeline ———
      Sources are concatenated into one frame list. Each timeline segment maps a
@@ -235,6 +236,7 @@ function initScrollFilm(root, cfg) {
 
   function fireCounters(scope) {
     scope.querySelectorAll(".stat-number[data-value]").forEach((el) => {
+      if (el.hasAttribute("data-static")) return;   // years, codes: never count up
       const target = parseFloat(el.dataset.value);
       const decimals = parseInt(el.dataset.decimals || "0", 10);
       gsap.fromTo(el, { textContent: 0 }, {

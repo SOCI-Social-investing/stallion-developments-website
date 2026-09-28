@@ -1,4 +1,4 @@
-/* Stallion Developments — shared site behaviour (all pages) */
+/* Shared site behaviour (all pages): nav, reveals, counters, forms, contact prefill, filters */
 (function () {
   const body = document.body;
 
@@ -28,7 +28,7 @@
   }
 
   /* Count-up numbers outside the film band */
-  const counters = document.querySelectorAll(".page .stat-number, .page-flow .stat-number");
+  const counters = document.querySelectorAll(".page .stat-number:not([data-static]), .page-flow .stat-number:not([data-static])");
   const animateCount = (el) => {
     const target = parseFloat(el.dataset.value);
     const decimals = parseInt(el.dataset.decimals || "0", 10);
@@ -49,11 +49,11 @@
   }
 
   /* Forms. All forms post to the Formspree endpoint in js/config.js, which
-     relays them by email to the client. reCAPTCHA v3 runs invisibly on submit
+     relays them by email to the client (public/js/config.js). reCAPTCHA v3 runs invisibly on submit
      and Formspree verifies the token server-side. A honeypot field is added to
      every form as a second, free layer. With no endpoint configured, the form
      just shows its local success state. */
-  const CFG = window.STALLION || {};
+  const CFG = window.SITE || {};
   const forms = document.querySelectorAll("form.form, form.news-form");
 
   function loadRecaptcha() {
@@ -92,7 +92,7 @@
         if (endpoint) {
           const name = form.dataset.form || (form.classList.contains("news-form") ? "newsletter" : "form");
           const data = new FormData(form);
-          data.append("_subject", `Stallion website: ${name.replace(/-/g, " ")}`);
+          data.append("_subject", `${CFG.siteName || "Website"}: ${name.replace(/-/g, " ")}`);
           data.append("form", name);
           data.append("page", location.href);
           const token = await captchaToken("submit");
@@ -105,7 +105,7 @@
         if (ok) ok.scrollIntoView({ behavior: "smooth", block: "center" });
       } catch (err) {
         if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label; }
-        alert("Something went wrong sending your message. Please email " + (CFG.notifyEmail || "info@stalliondevelopments.com") + ".");
+        alert("Something went wrong sending your message." + (CFG.notifyEmail ? " Please email " + CFG.notifyEmail + "." : " Please try again."));
       }
     });
   });

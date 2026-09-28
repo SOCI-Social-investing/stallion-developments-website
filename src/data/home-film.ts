@@ -48,6 +48,9 @@ export const timeline: Segment[] = [
 /* Hero + most of clip 1 must be in before the loader lifts */
 export const preload: Ref = ["film", 40];
 
+/* Runway in viewport heights, tuned by eye (the default would be 100vh/70vh per unit: 1660/1162) */
+export const length = { desktop: 1600, mobile: 1150 };
+
 /* Dark wash for the aerial stats moment */
 export const overlay = { enter: "clip6:0.12", leave: "glow:0.97", max: 0.9, fade: 0.03 };
 

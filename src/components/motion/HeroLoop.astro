@@ -1,0 +1,19 @@
+---
+/* HeroLoop: a muted, looping video behind a page hero, over its poster image.
+   Put it first inside <section class="page-hero has-loop">.
+   Loops come from tools/kie.py video with the SAME image as start and end frame,
+   encoded by tools/loop.sh into public/assets/loops/<name>.mp4 (+ <name>.webp poster).
+   Reduced motion shows the poster only (css). */
+import { url } from "../../lib/url";
+
+interface Props {
+  /** File name in public/assets/loops/ without extension */
+  name: string;
+}
+const { name } = Astro.props;
+const poster = url(`assets/loops/${name}.webp`);
+---
+<div class="hero-loop" aria-hidden="true">
+  <img src={poster} alt="" loading="eager" />
+  <video autoplay muted loop playsinline preload="metadata" poster={poster}><source src={url(`assets/loops/${name}.mp4`)} type="video/mp4" /></video>
+</div>
