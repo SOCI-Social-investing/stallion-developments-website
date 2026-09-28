@@ -7,6 +7,7 @@ Usage (all commands read KIE_API_KEY from .env in the project root):
   kie.py image   --prompt P [--ref f ...] [--ar 1:1] [--res 2K] --out out.png
   kie.py video   --prompt P --start f [--end f] [--dur 5] [--ar 1:1] [--mode pro] --out out.mp4
   kie.py poll    <taskId>                     -> prints result JSON
+  kie.py credits                              -> prints the account balance (check BEFORE planning spend)
 
 Refs / start / end may be local files (uploaded automatically) or http URLs.
 """
@@ -108,6 +109,7 @@ def main():
 
     u = sub.add_parser("upload"); u.add_argument("file")
     p = sub.add_parser("poll"); p.add_argument("taskId")
+    sub.add_parser("credits")
 
     im = sub.add_parser("image")
     im.add_argument("--prompt", required=True)
@@ -126,7 +128,10 @@ def main():
     vd.add_argument("--out", required=True)
 
     a = ap.parse_args()
-    if a.cmd == "upload":
+    if a.cmd == "credits":
+        r = requests.get(f"{API}/chat/credit", headers=H(), timeout=30); r.raise_for_status()
+        print(r.json().get("data"))
+    elif a.cmd == "upload":
         print(upload(a.file))
     elif a.cmd == "poll":
         print(json.dumps(poll(a.taskId), indent=2))
