@@ -582,6 +582,7 @@ a:focus-visible, .btn:focus-visible, button:focus-visible { outline: 2px solid v
   body.nav-open .site-header { background: var(--cream); }
   .site-nav a { font-family: var(--font-display); font-size: 2.2rem; color: var(--ink); }
   .nav-toggle { display: grid; }
+  .header-right { position: relative; z-index: 50; }   /* keeps the toggle tappable above the open menu (z-index 49) */
   .header-cta { display: none; }
   .site-nav .header-cta { display: inline-block; margin-top: 1rem; font-size: 1rem; font-family: var(--font-body); }
 
