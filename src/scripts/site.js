@@ -99,6 +99,13 @@
           if (token) data.append("g-recaptcha-response", token);
           const res = await fetch(endpoint, { method: "POST", body: data, headers: { Accept: "application/json" } });
           if (!res.ok) throw new Error("Request failed");
+          // GTM listens for this to fire the GA4 key events (contact_form_submit / floor_plan_request)
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "form_success",
+            form_name: name,
+            form_type: name === "contact" ? "contact" : name.endsWith("-register") ? "floor_plan" : name,
+          });
         }
         form.classList.add("sent");
         const ok = form.parentElement.querySelector(".form-success");
