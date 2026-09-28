@@ -1,0 +1,133 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.stalliondevelopments.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Contact",
+        "item": "https://www.stalliondevelopments.com/contact/"
+      }
+    ]
+  }
+];
+---
+<Layout
+  title="Contact Stallion Developments | Ontario Home Builder"
+  description="Contact Stallion Developments about new homes in Muskoka and Ontario, investment opportunities, realtor partnerships or land. We reply within one business day."
+  path="contact/"
+  current="contact"
+  schema={schema}
+>
+
+<main class="page">
+  <section class="page-hero has-loop">
+    <div class="hero-loop" aria-hidden="true">
+      <img src="../assets/loops/contact.webp" alt="" loading="eager" />
+      <video autoplay muted loop playsinline preload="metadata" poster="../assets/loops/contact.webp"><source src="../assets/loops/contact.mp4" type="video/mp4" /></video>
+    </div>
+    <div class="wrap">
+      <div>
+        <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a><span>/</span>Contact</nav>
+        <span class="eyebrow">Contact</span>
+        <h1>Let's talk.</h1>
+        <p class="lede">Whether you're looking for your next home, your next investment or your next partnership, we reply within one business day.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="route-cards">
+        <button class="route-card reveal" type="button" data-reason="Buying a home"><h3>Buying a home</h3><p>Floor plans, pricing, site visits.</p><span class="link-arrow">Talk to sales</span></button>
+        <button class="route-card reveal" type="button" data-reason="Investing"><h3>Investing</h3><p>Consultations for accredited investors.</p><span class="link-arrow">Investor relations</span></button>
+        <button class="route-card reveal" type="button" data-reason="Realtor"><h3>Realtors</h3><p>Co-op, VIP previews and broker events.</p><span class="link-arrow">Partner with us</span></button>
+        <button class="route-card reveal" type="button" data-reason="Land or JV"><h3>Land &amp; joint ventures</h3><p>Have land in Ontario? We acquire and partner.</p><span class="link-arrow">Submit a site</span></button>
+        <button class="route-card reveal" type="button" data-reason="Media"><h3>Media &amp; general</h3><p>Everything else.</p><span class="link-arrow">Say hello</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section paper" id="form">
+    <div class="wrap form-layout">
+      <div class="sticky reveal">
+        <span class="eyebrow">Get in touch</span>
+        <h2 class="h2" style="margin-top:0.8rem">Send us a message</h2>
+        <dl class="contact-details" style="margin-top:2rem">
+          <div><dt>Email</dt><dd><a href="mailto:info@stalliondevelopments.com">info@stalliondevelopments.com</a></dd></div>
+          <!-- CONFIRM: Phone -->
+          <div><dt>Sales &amp; site visits</dt><dd>By appointment, Maple Street, Bracebridge</dd></div><!-- CONFIRM -->
+          <!-- CONFIRM: Head office address, Hours -->
+          <!-- Optional: WhatsApp "Chat with our team" button -->
+        </dl>
+      </div>
+      <div>
+        <form class="form reveal" method="post" data-endpoint="" data-form="contact">
+          <div class="row"><div class="field"><label for="first_name">First name*</label><input id="first_name" name="first_name" type="text" required placeholder="" /></div><div class="field"><label for="last_name">Last name*</label><input id="last_name" name="last_name" type="text" required placeholder="" /></div></div>
+          <div class="row"><div class="field"><label for="email">Email*</label><input id="email" name="email" type="email" required placeholder="" /></div><div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" placeholder="" /></div></div>
+          <div class="row"><div class="field"><label for="reason">I'm reaching out about*</label><select id="reason" name="reason" required><option value="" disabled selected>Select…</option><option value="Buying a home">Buying a home</option><option value="Investing">Investing</option><option value="Realtor">Realtor</option><option value="Land or JV">Land or JV</option><option value="Media">Media</option><option value="Other">Other</option></select></div><div class="field"><label for="community">Community of interest</label><select id="community" name="community"><option value="" disabled selected>Select…</option><option value="Maple Place">Maple Place</option><option value="Anglo Street">Anglo Street</option><option value="Chicopee Heights">Chicopee Heights</option><option value="Lady of the Woods">Lady of the Woods</option><option value="Not sure">Not sure</option></select></div></div>
+          <div class="field"><label for="message">Message*</label><textarea id="message" name="message" required placeholder="How can we help?"></textarea></div>
+          <label class="check"><input type="checkbox" name="consent" value="yes" required /> <span>Yes, I'd like to receive updates, floor plans and offers from Stallion Developments by email and phone. I can unsubscribe at any time.</span></label>
+          <button class="btn btn-solid btn-lg" type="submit">Send message</button>
+          <p class="micro recaptcha-note">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
+        </form>
+        <div class="form-success"><h3>Thanks for reaching out.</h3><p>We'll be in touch within one business day.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">Communities</span><h2>Looking for a specific community?</h2></div>
+      <div class="card-grid cols-4">
+      <a class="community-card reveal" href="../communities/maple-place-bracebridge/" data-tags="muskoka selling">
+        <div class="card-media"><img src="../assets/img/maple-exterior.webp" alt="Maple Place semi-detached home exterior, Bracebridge Muskoka" loading="lazy" /><span class="status-label"><span class="dot"></span>Now selling</span></div>
+        <div class="card-body">
+          <h3>Maple Place</h3>
+          <p class="card-desc">Walk-to-downtown living in the Heart of Muskoka</p>
+          <p class="card-meta">Semi-detached homes · Bracebridge</p>
+          <span class="link-arrow">Register</span>
+        </div>
+      </a>
+      <a class="community-card reveal" href="../communities/anglo-street-bracebridge/" data-tags="muskoka soon">
+        <div class="card-media placeholder"><span class="ph-mark">AS</span><span class="ph-note">Renderings coming soon</span><span class="status-label soon"><span class="dot"></span>Coming soon</span></div>
+        <div class="card-body">
+          <h3>Anglo Street</h3>
+          <p class="card-desc">The next chapter of Bracebridge</p>
+          <p class="card-meta">Semi-detached homes · Bracebridge · 1 acre</p>
+          <span class="link-arrow">Register interest</span>
+        </div>
+      </a>
+      <a class="community-card reveal" href="../communities/chicopee-heights-kitchener/" data-tags="waterloo soon">
+        <div class="card-media placeholder"><span class="ph-mark">CH</span><span class="ph-note">Renderings coming soon</span><span class="status-label soon"><span class="dot"></span>Coming soon</span></div>
+        <div class="card-body">
+          <h3>Chicopee Heights</h3>
+          <p class="card-desc">Detached family homes in Waterloo Region</p>
+          <p class="card-meta">Detached homes · Kitchener · 3 acres</p>
+          <span class="link-arrow">Register interest</span>
+        </div>
+      </a>
+      <a class="community-card reveal" href="../communities/lady-of-the-woods-prince-edward-county/" data-tags="pec soon">
+        <div class="card-media placeholder"><span class="ph-mark">LW</span><span class="ph-note">Renderings coming soon</span><span class="status-label soon"><span class="dot"></span>Coming soon</span></div>
+        <div class="card-body">
+          <h3>Lady of the Woods Estate Homes</h3>
+          <p class="card-desc">Estate living on 24 acres in Prince Edward County</p>
+          <p class="card-meta">Estate homes · Prince Edward County</p>
+          <span class="link-arrow">Register interest</span>
+        </div>
+      </a>
+    </div>
+    </div>
+  </section>
+</main>
+</Layout>

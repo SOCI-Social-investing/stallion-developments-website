@@ -1,5 +1,5 @@
 // Confirm background loops actually play: prints readyState / currentTime for each <video> on a page.
-//   node tools/videocheck.mjs http://localhost:8014/communities/ [more urls]
+//   node tools/videocheck.mjs http://localhost:8014/stallion-developments-website/communities/ [more urls]
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const pw = require("/Users/alyelgohary/.npm/_npx/9833c18b2d85bc59/node_modules/playwright-core");

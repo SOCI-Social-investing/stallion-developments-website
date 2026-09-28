@@ -1,0 +1,43 @@
+---
+/* ScrollScrub: a canvas that plays a frame sequence as a runway element scrolls
+   past, for heroes and cards inside a normal page (no pinning, no Lenis).
+
+   <div class="scrub-runway" id="seasons">          ← gives the scroll span
+     <section class="sticky-hero">…
+       <ScrollScrub frames="frames/seasons/se_" count={183} runway="#seasons"
+                    timeline="0:0,0.34:60,1:182" poster="assets/img/x.webp" aria-label="…" />
+       <li data-at="0.34">Fall</li>                 ← gets .is-active / .is-current past 0.34
+     </section>
+   </div>
+
+   timeline is "progress:frame" pairs, linear between them; default plays 0..count-1 across the runway.
+   Other attributes (role, aria-label, class) are passed to the canvas. */
+import type { HTMLAttributes } from "astro/types";
+import { url } from "../../lib/url";
+
+interface Props extends HTMLAttributes<"canvas"> {
+  /** Path prefix in public/: frames/seasons/se_ → frames/seasons/se_0001.webp … */
+  frames: string;
+  count: number;
+  /** Selector for the element whose scroll span drives progress; defaults to the closest <section> */
+  runway?: string;
+  timeline?: string;
+  /** Image in public/ drawn while frames load */
+  poster?: string;
+}
+
+const { frames, count, runway, timeline, poster, ...attrs } = Astro.props;
+---
+<canvas
+  data-scrub
+  data-frames={url(frames)}
+  data-count={count}
+  data-poster={poster && url(poster)}
+  data-runway={runway}
+  data-timeline={timeline}
+  {...attrs}
+></canvas>
+
+<script>
+  import "./scroll-scrub.js";
+</script>

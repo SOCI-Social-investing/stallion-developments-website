@@ -1,0 +1,199 @@
+---
+/* ScrollFilm: a full-viewport, scroll-scrubbed frame sequence with text beats.
+
+   <Layout variant="film" …>
+     <ScrollFilm sources={…} timeline={…} preload={["film", 40]}>
+       <section class="band-section" data-seg="hero:0,hero:1" data-animation="hero">…</section>
+       <section class="band-section" data-seg="clip1:0.15,clip1:0.95" data-animation="slide-left">…</section>
+     </ScrollFilm>
+     <main class="page-flow">…content that scrolls over the film when it ends…</main>
+   </Layout>
+
+   - sources: frame sequences in public/, played in the order the timeline asks for.
+     { film: { dir: "frames", prefix: "frame_", count: 246 } } → frames/frame_0001.webp …
+   - timeline: segments of scroll, each with a relative length in `units`, either
+     playing a frame range ({ from: ["film", 0], to: ["film", 36] }) or holding a
+     frame ({ hold: ["film", 36] }).
+   - Slot: .band-section elements. data-seg="<segment>:<0..1>,<segment>:<0..1>" is
+     when the section is on screen; data-animation is how it enters (slide-left,
+     slide-right, fade-up, clip-reveal, rotate-in, stagger-up). One section may be
+     data-animation="hero": it is showing at load and fades out over its segment.
+     Any .stat-number[data-value] inside a section counts up when it enters.
+   - Needs the page to scroll past it: put the rest of the page in an element
+     matching `release` (default .page-flow) with position: relative and a z-index above 10.
+
+   One per page (it is fixed to the viewport). Uses GSAP, ScrollTrigger and Lenis. */
+import { url } from "../../lib/url";
+
+type FrameRef = [source: string, frame: number];
+type Segment =
+  | { id: string; units: number; from: FrameRef; to: FrameRef }
+  | { id: string; units: number; hold: FrameRef };
+
+interface Props {
+  sources: Record<string, { dir: string; prefix: string; count: number; ext?: string }>;
+  timeline: Segment[];
+  /** Frames loaded before the loader lifts, as a frame reference: everything up to it */
+  preload: FrameRef;
+  /** Brand name on the loader; false to skip the loader */
+  loader?: string | false;
+  /** Darkens the page for a stretch of the film (stats over an aerial, say). Refs are "segment:fraction". */
+  overlay?: { enter: string; leave: string; max?: number; fade?: number; color?: string };
+  /** Oversized sliding line of text for a stretch of the film */
+  marquee?: { text: string; enter: string; leave: string };
+  /** Runway height in viewport heights: how much scrolling the whole film takes */
+  length?: { desktop: number; mobile: number };
+  /** Page colour behind the film card; match the page background */
+  ground?: string;
+  /** Corner radius of the film card, css px */
+  radius?: number;
+  /** Space kept clear above the card on landscape screens (a fixed header), css px */
+  headerOffset?: number;
+  /** Elements inside each band section that the entrance animation moves */
+  items?: string;
+  /** Content after the film; the film hides once this reaches 60% up the viewport */
+  release?: string;
+  /** Fixed header that gets .solid once the film is released */
+  header?: string;
+}
+
+const {
+  sources,
+  timeline,
+  preload,
+  loader = false,
+  overlay,
+  marquee,
+  length = { desktop: 1600, mobile: 1150 },
+  ground = "#161b14",
+  radius = 16,
+  headerOffset = 84,
+  items = ".beat-index, .beat-heading, .beat-body, .stats-hero, .stat",
+  release = ".page-flow",
+  header = ".site-header",
+} = Astro.props;
+
+const config = {
+  sources: Object.fromEntries(
+    Object.entries(sources).map(([key, s]) => [key, { ...s, dir: url(s.dir).replace(/\/?$/, "/"), ext: s.ext ?? "webp" }])
+  ),
+  timeline,
+  preload,
+  overlay: overlay && { max: 0.9, fade: 0.03, ...overlay },
+  marquee: marquee && { enter: marquee.enter, leave: marquee.leave },
+  ground,
+  radius,
+  headerOffset,
+  items,
+  release,
+  header,
+};
+const vars = [
+  `--film-runway: ${length.desktop}vh`,
+  `--film-runway-mobile: ${length.mobile}vh`,
+  overlay?.color && `--film-overlay: ${overlay.color}`,
+].filter(Boolean).join("; ");
+---
+<div class="scroll-film" data-scroll-film data-config={JSON.stringify(config)} style={vars}>
+  {loader && (
+    <div class="film-loader" aria-hidden="true">
+      <div class="loader-inner">
+        <span class="loader-brand">{loader}</span>
+        <div class="loader-track"><div class="loader-bar"></div></div>
+        <span class="loader-percent">0</span>
+      </div>
+    </div>
+  )}
+  <div class="canvas-wrap"><canvas></canvas></div>
+  {overlay && <div class="film-overlay" aria-hidden="true"></div>}
+  {marquee && (
+    <div class="marquee-wrap" aria-hidden="true">
+      <span class="marquee-text">{[marquee.text, marquee.text, marquee.text].join("  ")}</span>
+    </div>
+  )}
+  <div class="band">
+    <slot />
+  </div>
+  <div class="film-runway"></div>
+</div>
+
+<script>
+  import "./scroll-film.js";
+</script>
+
+<style is:global>
+  /* Loader */
+  .film-loader {
+    position: fixed; inset: 0; z-index: 100;
+    background: var(--cream);
+    display: grid; place-items: center;
+    transition: opacity 0.7s ease, visibility 0.7s;
+  }
+  .film-loader.done { opacity: 0; visibility: hidden; }
+  .loader-inner { display: grid; justify-items: center; gap: 1.4rem; }
+  .loader-brand {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    letter-spacing: 0.01em;
+  }
+  .loader-track {
+    width: min(260px, 60vw); height: 2px;
+    background: var(--hairline); overflow: hidden;
+  }
+  .loader-bar { width: 0%; height: 100%; background: var(--pine); transition: width 0.25s ease; }
+  .loader-percent { font-size: 0.8rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+
+  /* Canvas */
+  .canvas-wrap { position: fixed; inset: 0; z-index: 1; }
+  .canvas-wrap canvas { width: 100%; height: 100%; display: block; }
+
+  .film-overlay {
+    position: fixed; inset: 0; z-index: 3;
+    background: var(--film-overlay, #171d15);
+    opacity: 0; pointer-events: none;
+  }
+
+  /* Marquee */
+  .marquee-wrap {
+    position: fixed; left: 0; right: 0; bottom: 3vh; z-index: 2;
+    overflow: hidden; white-space: nowrap;
+    opacity: 0; pointer-events: none;
+  }
+  .marquee-text {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 12vw; line-height: 1;
+    color: var(--moss);
+    opacity: 0.16;
+    will-change: transform;
+  }
+
+  /* Text band. Film text column (desktop): the frame is anchored right,
+     text sits on the solid ground to its left. */
+  :root { --film-text-col: clamp(20rem, 40vw, 36rem); }
+  .band { position: fixed; inset: 0; z-index: 4; pointer-events: none; }
+  .band-section {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 84px var(--gutter) 4vh;   /* mirrors the film card's top/bottom margins */
+    visibility: hidden;
+  }
+  .band-section.is-active { visibility: visible; }
+  .band-section a { pointer-events: auto; }
+  .band-section .beat-copy, .band-section .hero-inner { width: var(--film-text-col); max-width: 100%; }
+
+  /* Scroll runway */
+  .film-runway { height: var(--film-runway); position: relative; z-index: 0; }
+
+  @media (max-width: 860px) {
+    :root { --film-text-col: 100%; }
+    .band-section { justify-content: flex-start; padding-top: 88px; padding-bottom: 0; }
+    .band-section .beat-copy, .band-section .hero-inner { max-width: 34rem; }
+    .film-runway { height: var(--film-runway-mobile); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-wrap { display: none; }
+  }
+</style>

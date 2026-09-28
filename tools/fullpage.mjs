@@ -4,12 +4,12 @@ import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const pw = require("/Users/alyelgohary/.npm/_npx/9833c18b2d85bc59/node_modules/playwright-core");
 
-const [out, url = "http://localhost:8014/"] = process.argv.slice(2);
+const [out, url = "http://localhost:8014/stallion-developments-website/"] = process.argv.slice(2);
 const [vw, vh] = (process.env.VIEWPORT || "1440x900").split("x").map(Number);
 const browser = await pw.chromium.launch({ executablePath: process.env.CHROME || "/Users/alyelgohary/Library/Caches/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-mac-arm64/chrome-headless-shell" });
 const page = await browser.newPage({ viewport: { width: vw, height: vh }, deviceScaleFactor: 1 });
 await page.goto(url, { waitUntil: "load" });
-await page.waitForFunction(() => !document.getElementById("loader") || document.getElementById("loader").classList.contains("done"), null, { timeout: 60000 }).catch(() => {});
+await page.waitForFunction(() => !document.querySelector(".film-loader") || document.querySelector(".film-loader").classList.contains("done"), null, { timeout: 60000 }).catch(() => {});
 // force all reveal-on-scroll elements visible, then shoot only the flow
 await page.evaluate(() => document.querySelectorAll(".reveal").forEach((el) => el.classList.add("in")));
 await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));

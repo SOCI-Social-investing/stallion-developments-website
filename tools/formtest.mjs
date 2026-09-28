@@ -1,12 +1,12 @@
 // End-to-end form test without a real Formspree account: starts a mock endpoint,
 // points the page's config at it, fills and submits a form, and prints what arrived.
-//   node tools/formtest.mjs http://localhost:8014/contact/ "form.form"
+//   node tools/formtest.mjs http://localhost:8014/stallion-developments-website/contact/ "form.form"
 import http from "node:http";
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const pw = require("/Users/alyelgohary/.npm/_npx/9833c18b2d85bc59/node_modules/playwright-core");
 
-const [url = "http://localhost:8014/contact/", selector = "form.form"] = process.argv.slice(2);
+const [url = "http://localhost:8014/stallion-developments-website/contact/", selector = "form.form"] = process.argv.slice(2);
 const received = [];
 const server = http.createServer((req, res) => {
   let body = "";
