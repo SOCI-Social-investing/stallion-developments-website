@@ -21,7 +21,8 @@
    Leave either value empty and the site degrades gracefully: forms show
    the local "sent" state without sending (endpoint) or send without a
    captcha token (site key). A hidden honeypot field is always included. */
-window.STALLION = {
+window.SITE = {
+  siteName: "Stallion website",   // email subjects read "Stallion website: contact"
   formEndpoint: "",          // e.g. "https://formspree.io/f/abcdwxyz"
   recaptchaSiteKey: "",      // e.g. "6Lc...-...-...."
   notifyEmail: "info@stalliondevelopments.com",

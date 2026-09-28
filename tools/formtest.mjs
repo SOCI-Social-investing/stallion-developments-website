@@ -24,7 +24,7 @@ const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
 const errors = [];
 page.on("pageerror", (e) => errors.push(e.message));
 await page.goto(url, { waitUntil: "load" });
-await page.evaluate(() => { window.STALLION.formEndpoint = "http://localhost:8016/submit"; window.STALLION.recaptchaSiteKey = "6LcFAKEKEY-not-real"; });
+await page.evaluate(() => { window.SITE.formEndpoint = "http://localhost:8016/submit"; window.SITE.recaptchaSiteKey = "6LcFAKEKEY-not-real"; });
 
 // fill every required field with something plausible
 await page.evaluate((sel) => {

@@ -3,7 +3,7 @@
    url("communities/") → "/stallion-developments-website/communities/" */
 const BASE = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 
-export const url = (path = "") => BASE + path.replace(/^\//, "");
+export const url = (path = "") => (/^[a-z]+:/i.test(path) ? path : BASE + path.replace(/^\//, ""));
 
 /* Canonical and OG URLs always point at the production domain. */
 export const SITE_URL = "https://www.stalliondevelopments.com";

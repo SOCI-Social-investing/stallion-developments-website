@@ -41,9 +41,10 @@ interface Props {
   overlay?: { enter: string; leave: string; max?: number; fade?: number; color?: string };
   /** Oversized sliding line of text for a stretch of the film */
   marquee?: { text: string; enter: string; leave: string };
-  /** Runway height in viewport heights: how much scrolling the whole film takes */
+  /** Runway height in viewport heights: how much scrolling the whole film takes.
+      Defaults to 100vh per timeline unit on desktop and 70vh on mobile. */
   length?: { desktop: number; mobile: number };
-  /** Page colour behind the film card; match the page background */
+  /** Colour around the film card; defaults to the page background */
   ground?: string;
   /** Corner radius of the film card, css px */
   radius?: number;
@@ -64,14 +65,17 @@ const {
   loader = false,
   overlay,
   marquee,
-  length = { desktop: 1600, mobile: 1150 },
-  ground = "#161b14",
+  length,
+  ground,
   radius = 16,
   headerOffset = 84,
   items = ".beat-index, .beat-heading, .beat-body, .stats-hero, .stat",
   release = ".page-flow",
   header = ".site-header",
 } = Astro.props;
+
+const units = timeline.reduce((a, s) => a + s.units, 0);
+const runway = length ?? { desktop: Math.round(units * 100), mobile: Math.round(units * 70) };
 
 const config = {
   sources: Object.fromEntries(
@@ -89,8 +93,8 @@ const config = {
   header,
 };
 const vars = [
-  `--film-runway: ${length.desktop}vh`,
-  `--film-runway-mobile: ${length.mobile}vh`,
+  `--film-runway: ${runway.desktop}vh`,
+  `--film-runway-mobile: ${runway.mobile}vh`,
   overlay?.color && `--film-overlay: ${overlay.color}`,
 ].filter(Boolean).join("; ");
 ---
