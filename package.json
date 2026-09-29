@@ -3,7 +3,9 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "predev": "node tools/guard.mjs",
     "dev": "astro dev",
+    "prebuild": "node tools/guard.mjs",
     "build": "astro build",
     "preview": "astro preview"
   },
