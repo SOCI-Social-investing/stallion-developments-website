@@ -14,7 +14,7 @@
 
      3. google.com/recaptcha/admin → Create → type: v3 → domains:
         stalliondevelopments.com, www.stalliondevelopments.com,
-        alyelgohary-isl.github.io → copy the SITE key below.
+        soci-social-investing.github.io, stallion-developments.pages.dev → copy the SITE key below.
      4. In Formspree → the form → Settings → Spam protection → reCAPTCHA v3:
         paste the SECRET key there (never in this file).
 

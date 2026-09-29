@@ -1,5 +1,5 @@
 /* Site-root URLs that respect the deploy base ("/" on the domain,
-   "/stallion-developments-website/" on GitHub Pages).
+   "/stallion-developments-website/" on GitHub Pages; set by BASE_PATH at build time).
    url("communities/") → "/stallion-developments-website/communities/" */
 const BASE = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 

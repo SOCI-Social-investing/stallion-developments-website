@@ -4,11 +4,14 @@ import { createRequire } from 'module';
 
 const require = createRequire(import.meta.url);
 
-// Served from the GitHub Pages project path until the domain moves.
-// When stalliondevelopments.com points here (or on Cloudflare), set base to "/".
+// BASE_PATH is set by the GitHub Pages workflow from GitHub's own answer
+// ("/stallion-developments-website/" on the project site). Cloudflare Pages and
+// the production domain serve from the root, so anywhere else it defaults to "/".
+const base = process.env.BASE_PATH || "/";
+
 export default defineConfig({
-  site: "https://alyelgohary-isl.github.io",
-  base: "/stallion-developments-website/",
+  site: "https://www.stalliondevelopments.com",
+  base,
   trailingSlash: "always",
   build: { format: "directory" },
   // Astro 7 defaults to JSX whitespace rules, which drop line breaks between
