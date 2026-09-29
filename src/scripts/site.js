@@ -99,13 +99,13 @@
           if (token) data.append("g-recaptcha-response", token);
           const res = await fetch(endpoint, { method: "POST", body: data, headers: { Accept: "application/json" } });
           if (!res.ok) throw new Error("Request failed");
-          // GTM listens for this to fire the GA4 key events (contact_form_submit / floor_plan_request)
+          // Conversion signal, only once the endpoint has accepted the submission.
+          // With GTM: a Custom Event trigger on form_success fires the GA4 generate_lead tag.
+          // gtag.js only (no GTM): Layout.astro defines trackLead, which sends generate_lead itself.
+          const lead = { form_name: name, form_type: form.dataset.formType || name };
           window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: "form_success",
-            form_name: name,
-            form_type: name === "contact" ? "contact" : name.endsWith("-register") ? "floor_plan" : name,
-          });
+          window.dataLayer.push({ event: "form_success", ...lead });
+          if (typeof window.trackLead === "function") window.trackLead(lead);
         }
         form.classList.add("sent");
         const ok = form.parentElement.querySelector(".form-success");
