@@ -1,0 +1,42 @@
+---
+/* Served by Cloudflare Pages (and GitHub Pages) for any unknown URL, at whatever depth
+   it was requested from, so links go through url() rather than the relative ../ used elsewhere.
+   Without this file Cloudflare Pages treats the site as a single-page app and answers
+   every unknown path with the home page and a 200. */
+import Layout from "../layouts/Layout.astro";
+import { url } from "../lib/url";
+---
+<Layout
+  title="Page not found | Stallion Developments"
+  description="The page you were looking for isn't here. Explore Stallion Developments' communities, investment opportunities or get in touch."
+  path="404/"
+>
+  <meta slot="head" name="robots" content="noindex" />
+
+<main class="page">
+  <section class="page-hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">404</span>
+        <h1>This page has moved or doesn't exist</h1>
+        <p class="lede">Our website has a new home. Everything you're looking for is still here: our communities, floor plans and investment opportunities.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-solid" href={url("communities/")}>Explore communities</a>
+          <a class="btn btn-ghost" href={url("")}>Back to home</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap prose">
+      <h2>Popular pages</h2>
+      <ul>
+        <li><a href={url("communities/maple-place-bracebridge/")}>Maple Place, Bracebridge</a>: floor plans and pricing</li>
+        <li><a href={url("invest/")}>Invest with us</a></li>
+        <li><a href={url("team/")}>Our team</a></li>
+        <li><a href={url("contact/")}>Contact</a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+</Layout>
