@@ -1,0 +1,4 @@
+# Cloudflare Pages redirects (ignored by GitHub Pages). One rule per line: from  to  status
+# Old Webflow site (www.stalliondevelopments.com, crawled 2026-09-29): only / and /maple-place existed.
+/maple-place                   /communities/maple-place-bracebridge/   301
+/maple-place/                  /communities/maple-place-bracebridge/   301
