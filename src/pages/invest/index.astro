@@ -11,7 +11,7 @@ const schema = [
         "name": "What kind of investment is this?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Current Stallion offerings are private debt, a loan to the project secured by a registered first mortgage on the property. Investors earn a fixed interest rate over a defined term."
+          "text": "Current Stallion offerings are private debt, a loan to the project secured by a registered second mortgage on the property. Investors earn a fixed interest rate over a defined term."
         }
       },
       {
@@ -19,7 +19,7 @@ const schema = [
         "name": "Is the return guaranteed?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. All real estate investments carry risk, including possible loss of capital. The first-mortgage position and conservative loan-to-value are designed to reduce risk, not eliminate it."
+          "text": "No. All real estate investments carry risk, including possible loss of capital. The second-mortgage position and conservative loan-to-value are designed to reduce risk, not eliminate it."
         }
       },
       {
@@ -70,7 +70,7 @@ const schema = [
 ---
 <Layout
   title="Invest in Ontario Real Estate Development | Stallion"
-  description="First-mortgage secured private debt in Ontario residential development, for accredited investors. Conservative LTV, builder-led execution. Book a consultation."
+  description="Second-mortgage secured private debt in Ontario residential development, for accredited investors. Conservative LTV, builder-led execution. Book a consultation."
   path="invest/"
   current="invest"
   schema={schema}
@@ -84,12 +84,12 @@ const schema = [
         <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a><span>/</span>Invest With Us</nav>
         <span class="eyebrow">Invest with us</span><!-- optional sub-brand: Stallion Capital -->
         <h1>Invest in Ontario real estate development, alongside the builders.</h1>
-        <p class="lede">Access institutional-quality residential development through first-mortgage secured private debt, with conservative leverage, partner capital invested first, and a team that builds what it finances.</p>
+        <p class="lede">Access institutional-quality residential development through second-mortgage secured private debt, with conservative leverage, partner capital invested first, and a team that builds what it finances.</p>
         <div class="hero-ctas">
           <a class="btn btn-solid" href="#consultation">Book a confidential consultation</a>
           <a class="btn btn-ghost" href="#consultation">Download the investor overview</a><!-- gated: name, email, accredited status -->
         </div>
-        <div class="badge-strip"><span>First-mortgage security</span><span>Target 60% LTV</span><span>Partner capital first-in</span></div>
+        <div class="badge-strip"><span>Second-mortgage security</span><span>40% LTV</span><span>Partner capital first-in</span></div>
       </div>
       <div class="hero-media hero-media-loop reveal">
         <video autoplay muted loop playsinline preload="metadata" poster="../assets/img/maple-aerial-2.webp" aria-label="Aerial rendering of Maple Place, the current Stallion Developments offering in Bracebridge"><source src="../assets/loops/invest.mp4" type="video/mp4" /></video>
@@ -100,7 +100,7 @@ const schema = [
   <section class="section tight proof-bar">
     <div class="wrap proof-grid">
       <div class="proof-item reveal"><span class="proof-figure"><span class="stat-number" data-value="14" data-decimals="0">0</span>%</span><span class="proof-label">Fixed annual interest rate on current offering, per offering documents (not guaranteed)</span></div>
-      <div class="proof-item reveal"><span class="proof-figure"><span class="stat-number" data-value="60" data-decimals="0">0</span>%</span><span class="proof-label">Target maximum loan-to-value</span></div>
+      <div class="proof-item reveal"><span class="proof-figure"><span class="stat-number" data-value="40" data-decimals="0">0</span>%</span><span class="proof-label">Target maximum loan-to-value</span></div>
       <div class="proof-item reveal"><span class="proof-figure">$<span class="stat-number" data-value="1.2" data-decimals="1">0</span>M</span><span class="proof-label">Partner capital already invested in Maple Place</span></div>
       <div class="proof-item reveal"><span class="proof-figure">$<span class="stat-number" data-value="100" data-decimals="0">0</span>K</span><span class="proof-label">Minimum investment</span></div>
     </div>
@@ -120,8 +120,8 @@ const schema = [
     <div class="wrap">
       <div class="section-head reveal"><span class="eyebrow">How we protect capital</span><h2>Built-in protections</h2></div>
       <div class="feature-grid">
-        <div class="feature reveal"><span class="idx">01</span><h3>First-mortgage position.</h3><p>Investor capital is secured by a registered first mortgage on the project land and improvements.</p></div>
-        <div class="feature reveal"><span class="idx">02</span><h3>Conservative leverage.</h3><p>We target a maximum 60% loan-to-value, which leaves a meaningful equity cushion beneath investor capital.</p></div>
+        <div class="feature reveal"><span class="idx">01</span><h3>Second-mortgage position.</h3><p>Investor capital is secured by a registered second mortgage on the project land and improvements.</p></div>
+        <div class="feature reveal"><span class="idx">02</span><h3>Conservative leverage.</h3><p>We target a maximum 40% loan-to-value, which leaves a meaningful equity cushion beneath investor capital.</p></div>
         <div class="feature reveal"><span class="idx">03</span><h3>Partners invest first.</h3><p>Stallion's partners put their own capital in ahead of investors. On Maple Place, that's $1.2M.</p></div>
         <div class="feature reveal"><span class="idx">04</span><h3>Permits in hand.</h3><p>We raise construction capital only once land is owned and permits are secured.</p></div>
         <div class="feature reveal"><span class="idx">05</span><h3>Fixed-price construction.</h3><p>Fixed-price subcontracts and a built-in contingency help contain cost overruns, and timeline buffers absorb Ontario winters.</p></div>
@@ -153,11 +153,11 @@ const schema = [
           <h2>Maple Place, Bracebridge</h2>
           <p class="featured-lede">Secured private debt financing four premium semi-detached homes at 243–249 Maple Street, Bracebridge, Muskoka. The land is owned and the permits are approved.</p>
           <dl class="terms" style="margin-top:1.4rem">
-            <div><dt>Total raise</dt><dd>CAD $1,800,000</dd></div><!-- CONFIRM: remaining allocation -->
+            <div><dt>Total raise</dt><dd>CAD $1,000,000</dd></div><!-- CONFIRM: remaining allocation -->
             <div><dt>Minimum investment</dt><dd>$100,000</dd></div>
-            <div><dt>Interest rate</dt><dd>14% fixed annual rate</dd></div><!-- CONFIRM: paid monthly vs. at term, see 9.3 -->
+            <div><dt>Interest rate</dt><dd>Fixed annual rate</dd></div><!-- CONFIRM: paid monthly vs. at term, see 9.3 -->
             <div><dt>Term</dt><dd>12 months, 6-month extension option</dd></div>
-            <div><dt>Security</dt><dd>Registered first mortgage, target 60% LTV</dd></div>
+            <div><dt>Security</dt><dd>Registered mortgage, target LTV</dd></div>
             <div><dt>Partner capital</dt><dd>$1.2M invested</dd></div>
             <div><dt>Use of funds</dt><dd>Construction</dd></div>
             <!-- CONFIRM: Status (Open / Fully subscribed) -->
@@ -177,12 +177,12 @@ const schema = [
       <div class="section-head reveal"><span class="eyebrow">The pipeline</span><h2>A $50M Ontario development pipeline</h2><p>Priority allocation is offered to existing Stallion investors.</p></div>
       <div class="table-scroll reveal">
         <table class="data-table">
-          <thead><tr><th>Project</th><th>Location</th><th>Type</th><th>Land</th><th>Est. project value</th></tr></thead><!-- CONFIRM: expected delivery dates for all four projects -->
+          <thead><tr><th>Project</th><th>Location</th><th>Type</th></tr></thead><!-- CONFIRM: expected delivery dates for all four projects -->
           <tbody>
-            <tr><td><a href="../communities/maple-place-bracebridge/" style="text-decoration:none">Maple Place</a></td><td>Bracebridge, Muskoka</td><td>Semi-detached</td><td>0.5 acre</td><td class="num">CAD $3M</td></tr>
-            <tr><td><a href="../communities/anglo-street-bracebridge/" style="text-decoration:none">Anglo Street</a></td><td>Bracebridge, Muskoka</td><td>Semi-detached</td><td>1 acre</td><td class="num">CAD $3–4M</td></tr><!-- CONFIRM: $3M on site, $4M in deck -->
-            <tr><td><a href="../communities/chicopee-heights-kitchener/" style="text-decoration:none">Chicopee Heights</a></td><td>Kitchener</td><td>Detached</td><td>3 acres</td><td class="num">CAD $22M</td></tr>
-            <tr><td><a href="../communities/lady-of-the-woods-prince-edward-county/" style="text-decoration:none">Lady of the Woods Estate Homes</a></td><td>Prince Edward County</td><td>Estate homes</td><td>24 acres</td><td class="num">CAD $20M</td></tr>
+            <tr><td><a href="../communities/maple-place-bracebridge/" style="text-decoration:none">Maple Place</a></td><td>Bracebridge, Muskoka</td><td>Semi-detached</td></tr>
+            <tr><td><a href="../communities/anglo-street-bracebridge/" style="text-decoration:none">Anglo Street</a></td><td>Bracebridge, Muskoka</td><td>Semi-detached</td></tr>
+            <tr><td><a href="../communities/chicopee-heights-kitchener/" style="text-decoration:none">Chicopee Heights</a></td><td>Kitchener</td><td>Detached</td></tr>
+            <tr><td><a href="../communities/lady-of-the-woods-prince-edward-county/" style="text-decoration:none">Lady of the Woods Estate Homes</a></td><td>Prince Edward County</td><td>Estate homes</td></tr>
           </tbody>
         </table>
       </div>
@@ -217,11 +217,11 @@ const schema = [
       <div class="faq reveal">
       <details>
         <summary>What kind of investment is this?</summary>
-        <div class="answer"><p>Current Stallion offerings are private debt, a loan to the project secured by a registered first mortgage on the property. Investors earn a fixed interest rate over a defined term.</p></div>
+        <div class="answer"><p>Current Stallion offerings are private debt, a loan to the project secured by a registered second mortgage on the property. Investors earn a fixed interest rate over a defined term.</p></div>
       </details>
       <details>
         <summary>Is the return guaranteed?</summary>
-        <div class="answer"><p>No. All real estate investments carry risk, including possible loss of capital. The first-mortgage position and conservative loan-to-value are designed to reduce risk, not eliminate it.</p></div>
+        <div class="answer"><p>No. All real estate investments carry risk, including possible loss of capital. The second-mortgage position and conservative loan-to-value are designed to reduce risk, not eliminate it.</p></div>
       </details>
       <details>
         <summary>What is the minimum investment?</summary>
