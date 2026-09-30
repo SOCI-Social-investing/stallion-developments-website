@@ -528,8 +528,8 @@ fieldset.checks legend { padding: 0; margin-bottom: 0.7rem; font-size: 0.82rem; 
 fieldset.checks .check { font-size: 0.9rem; font-weight: 400; }
 
 .form-success { display: none; padding: 1.6rem; border: 1px solid var(--moss); border-radius: 14px; color: var(--ink); background: rgba(169, 195, 154, 0.08); }
-.form.sent { display: none; }
-.form.sent + .form-success { display: block; }
+.form.sent, .news-form.sent { display: none; }
+.form.sent + .form-success, .news-form.sent + .form-success { display: block; }
 .form-success h3 { font-size: 1.5rem; margin-bottom: 0.4rem; }
 .sticky { position: sticky; top: 100px; }
 
