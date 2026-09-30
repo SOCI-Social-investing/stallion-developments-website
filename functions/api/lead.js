@@ -48,7 +48,10 @@ export async function onRequestPost({ request, env }) {
     const v = value.trim();
     if (!v) continue;
     if (fields.length >= MAX_FIELDS || v.length > MAX_VALUE) return json(413, { ok: false, error: "too large" });
-    fields.push([key, v]);
+    // Checkbox groups (e.g. "communities" on /register/) repeat the key: one row, values joined
+    const same = fields.find(([k]) => k === key);
+    if (same) same[1] += `, ${v}`;
+    else fields.push([key, v]);
   }
 
   const email = (fields.find(([k]) => k === "email") || [])[1] || "";
