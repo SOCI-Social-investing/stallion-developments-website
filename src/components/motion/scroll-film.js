@@ -15,6 +15,15 @@ gsap.registerPlugin(ScrollTrigger);
 document.querySelectorAll("[data-scroll-film]").forEach((root) => initScrollFilm(root, JSON.parse(root.dataset.config)));
 
 function initScrollFilm(root, cfg) {
+  /* Reduced motion: no scrubbing. The band sections are shown as stacked sections,
+     each with its still (an <img class="band-still"> inside it), styled by .film-static
+     in ScrollFilm.astro. The text is in the page either way. */
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    root.classList.add("film-static");
+    document.body.classList.add("film-static-page");
+    return;
+  }
+
   const { radius, headerOffset } = cfg;
   const ground = cfg.ground || getComputedStyle(document.body).backgroundColor;   // the card sits on the page ground
 

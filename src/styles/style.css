@@ -284,6 +284,27 @@ body.nav-open .nav-toggle span::after { transform: translateY(-6px) rotate(-45de
 .proof-figure { font-family: var(--font-display); font-size: clamp(2.4rem, 4.2vw, 3.8rem); line-height: 1; }
 .proof-label { display: block; margin-top: 0.5rem; color: var(--ink-soft); font-size: 0.92rem; max-width: 22ch; }
 
+/* Home film: keep the text column clear of the film card on landscape screens. The card is
+   min(100vh - header - bottom margin, 56vw) wide with a 3vw right margin (frameRect() in
+   scroll-film.js). Doubled :root beats ScrollFilm's own :root, which loads after this file. */
+@media (min-width: 861px) {
+  :root:root { --film-text-col: min(clamp(20rem, 40vw, 36rem), calc(97vw - min(100vh - 84px - max(24px, 4vh), 56vw) - var(--gutter) - 2.5rem)); }
+}
+
+/* Quick answer under a hero: plain text for search and AI tools to quote */
+.quick-answer .lede { color: var(--ink-soft); font-size: clamp(1.1rem, 1.6vw, 1.35rem); line-height: 1.6; }
+.quick-answer .lede a { color: var(--ink); }
+
+/* Homepage investor band: short and quiet, low on the page */
+.investor-band { border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+.investor-band p { color: var(--ink-soft); font-size: 1.05rem; }
+.investor-band strong { color: var(--ink); font-weight: 600; }
+.investor-band .link-arrow { margin-left: 0.4rem; white-space: nowrap; }
+
+/* Maple Place: the lower level next to the specs */
+.lower-level h2 { font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.06; }
+.lower-level p { color: var(--ink-soft); margin-top: 1.2rem; font-size: 1.08rem; max-width: 52ch; }
+
 /* Statement: heading left, prose right */
 .statement { display: grid; grid-template-columns: 1fr 1.25fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; }
 .statement h2 { font-size: clamp(2.2rem, 4.4vw, 3.8rem); line-height: 1.04; }
@@ -501,6 +522,11 @@ body.nav-open .nav-toggle span::after { transform: translateY(-6px) rotate(-45de
 .check input { margin-top: 0.3rem; accent-color: var(--pine); width: 16px; height: 16px; flex: none; }
 .form .btn { justify-self: start; margin-top: 0.4rem; }
 .form-note { font-size: 0.82rem; color: var(--ink-mute); }
+/* Register form: a group of checkboxes styled like a field */
+fieldset.checks { border: 0; padding: 0; margin: 0; display: grid; gap: 0.6rem; }
+fieldset.checks legend { padding: 0; margin-bottom: 0.7rem; font-size: 0.82rem; font-weight: 600; color: var(--ink-soft); }
+fieldset.checks .check { font-size: 0.9rem; font-weight: 400; }
+
 .form-success { display: none; padding: 1.6rem; border: 1px solid var(--moss); border-radius: 14px; color: var(--ink); background: rgba(169, 195, 154, 0.08); }
 .form.sent { display: none; }
 .form.sent + .form-success { display: block; }

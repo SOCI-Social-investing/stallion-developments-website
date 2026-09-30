@@ -1,0 +1,148 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+/* Client copy doc (2026-09-29): the page explains how Stallion works with investors and
+   leaves the terms for a private conversation. No public numbers (rate, LTV, raise, term,
+   minimum, partner capital) and no mortgage position: the offering documents state it.
+   Structured data: the site-wide Organization block plus this FAQ, no offer or price markup. */
+const faq = [
+  ["What kind of investment is this?", "A private loan to a specific Stallion project, secured by a registered mortgage on the property. Investors earn a fixed rate over a set term. Details are in each project's offering documents."],
+  ["Is my return guaranteed?", "No. Real estate investing carries risk, including the possible loss of capital."],
+  ["What's the minimum investment?", "It varies by project. We'll share it on your first call."],
+  ["How often will I hear from you?", "Every month, with construction progress, budget tracking and milestones."],
+  ["Can I get my money out early?", "Private real estate loans are illiquid. Plan to hold until the end of the term."],
+];
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faq.map(([q, a]) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } })),
+  },
+];
+---
+<Layout
+  title="Invest in Ontario Residential Development | Stallion Developments"
+  description="Stallion works with a small group of accredited investors on select Ontario home building projects, alongside the builders who deliver them."
+  path="investors/"
+  current="investors"
+  schema={schema}
+>
+
+<main class="page">
+  <!-- CONFIRM: a securities or mortgage lawyer approves this page before it goes live (FSRA syndicated mortgage rules, disclaimer wording) -->
+  <section class="page-hero has-media">
+    <div class="wrap">
+      <div>
+        <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a><span>/</span>Investors</nav>
+        <span class="eyebrow">Investors</span>
+        <h1>Build alongside the builders.</h1>
+        <p class="lede">Stallion partners with a small group of accredited investors on select residential projects in Ontario. Investor loans are secured against real property, our partners' own capital goes in first, and the team that raises the money is the team that builds the homes.</p>
+        <p class="micro" style="margin-top:1rem">Terms are shared privately with eligible investors.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-solid" href="#consultation">Request a confidential conversation</a>
+        </div>
+      </div>
+      <div class="hero-media hero-media-loop reveal">
+        <video autoplay muted loop playsinline preload="metadata" poster="../assets/img/maple-aerial-2.webp" aria-label="Aerial rendering of Maple Place semi-detached homes, Bracebridge"><source src="../assets/loops/invest.mp4" type="video/mp4" /></video>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our approach -->
+  <section class="section" id="approach">
+    <div class="wrap statement">
+      <h2 class="reveal">How a project is built matters more than how it's financed.</h2>
+      <div class="reveal">
+        <p>We think good returns come from careful building, not heavy borrowing. So we keep leverage modest and put our own money in ahead of anyone else's.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we protect investors: only what is true for every project -->
+  <section class="section paper" id="protections">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">How we protect investors</span><h2>What stays the same on every project</h2></div>
+      <div class="feature-grid">
+        <div class="feature reveal"><span class="idx">01</span><h3>Secured by real property.</h3><p>Investor loans are secured by a registered mortgage on the project land.</p></div>
+        <div class="feature reveal"><span class="idx">02</span><h3>Our money goes in first.</h3><p>Stallion's partners invest their own capital before we raise from anyone else.</p></div>
+        <div class="feature reveal"><span class="idx">03</span><h3>Monthly reporting.</h3><p>Construction progress, budget and milestones, every month.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The pipeline, high level only -->
+  <section class="section" id="pipeline">
+    <div class="wrap statement">
+      <h2 class="reveal">Four communities. One team.</h2>
+      <div class="reveal">
+        <p>Our Ontario pipeline spans Bracebridge, Kitchener and Prince Edward County, about $50M in future homes, all on land we already own.</p>
+        <p><a class="link-arrow" href="../communities/">See our communities</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section paper" id="process">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">Process</span><h2>How investing with Stallion works</h2></div>
+      <ol class="steps">
+        <li class="reveal"><h3>Intro call</h3><p>A confidential conversation about your goals and whether you're eligible.</p></li>
+        <li class="reveal"><h3>Review</h3><p>Eligible investors receive the offering documents, appraisal and budget.</p></li>
+        <li class="reveal"><h3>Invest</h3><p>Legal documents are signed through independent counsel.</p></li>
+        <li class="reveal"><h3>Stay informed</h3><p>Monthly updates until the loan is repaid.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Who can invest -->
+  <section class="section" id="eligibility">
+    <div class="wrap statement">
+      <h2 class="reveal">Who can invest</h2>
+      <p class="reveal">Our offerings are available only to accredited investors, as defined under Canadian securities law, in jurisdictions where we're permitted to offer them. We'll confirm eligibility on your first call.</p>
+    </div>
+  </section>
+
+  <section class="section paper" id="faq">
+    <div class="wrap-narrow">
+      <div class="section-head reveal"><h2>Frequently asked questions</h2></div>
+      <div class="faq reveal">
+        {faq.map(([q, a]) => (
+          <details>
+            <summary>{q}</summary>
+            <div class="answer"><p>{a}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Form, with the risk disclosure right above it -->
+  <section class="section" id="consultation">
+    <div class="wrap">
+      <p class="disclaimer reveal" style="margin-bottom:clamp(2rem,5vh,3rem)">Real estate investments involve substantial risk, including loss of capital, illiquidity, construction delays, cost overruns and market changes. Past results don't guarantee future performance.</p>
+    </div>
+    <div class="wrap form-layout">
+      <div class="sticky reveal">
+        <span class="eyebrow">Investor relations</span>
+        <h2 class="h2" style="margin-top:0.8rem">Start a confidential conversation</h2>
+        <p class="ink-soft" style="margin-top:1rem;font-size:1.08rem">Tell us a little about yourself and we'll be in touch within 2 business days.</p>
+        <p class="micro" style="margin-top:1.4rem">Prefer email? <a href="mailto:info@stalliondevelopments.com" style="color:var(--ink)">info@stalliondevelopments.com</a></p>
+      </div>
+      <div>
+        <form class="form reveal" method="post" data-endpoint="" data-form="investor-consultation" data-form-type="investor">
+          <div class="row"><div class="field"><label for="first_name">First name*</label><input id="first_name" name="first_name" type="text" required placeholder="" /></div><div class="field"><label for="last_name">Last name*</label><input id="last_name" name="last_name" type="text" required placeholder="" /></div></div>
+          <div class="row"><div class="field"><label for="email">Email*</label><input id="email" name="email" type="email" required placeholder="" /></div><div class="field"><label for="phone">Phone*</label><input id="phone" name="phone" type="tel" required placeholder="" /></div></div>
+          <div class="row"><div class="field"><label for="region">Country / Province*</label><input id="region" name="region" type="text" required placeholder="" /></div><div class="field"><label for="amount">Investment range*</label><select id="amount" name="amount" required><option value="" disabled selected>Select…</option><option value="Under $250K">Under $250K</option><option value="$250K–$500K">$250K–$500K</option><option value="$500K–$1M">$500K–$1M</option><option value="$1M+">$1M+</option><option value="Not sure yet">Not sure yet</option></select></div></div>
+          <div class="row"><div class="field"><label for="timeline">Timeline*</label><select id="timeline" name="timeline" required><option value="" disabled selected>Select…</option><option value="This month">This month</option><option value="1–3 months">1–3 months</option><option value="3–6 months">3–6 months</option><option value="6–12 months">6–12 months</option></select></div><div class="field"><label for="accredited">Accredited investor?*</label><select id="accredited" name="accredited" required><option value="" disabled selected>Select…</option><option value="Yes">Yes</option><option value="No">No</option><option value="Not sure">Not sure</option></select></div></div>
+          <div class="field"><label for="interest">Interested in</label><select id="interest" name="interest"><option value="" disabled selected>Select…</option><option value="Current offering">Current offering</option><option value="Future projects">Future projects</option><option value="Fund waitlist">Fund waitlist</option><option value="Partnership or JV">Partnership or JV</option></select></div>
+          <div class="field"><label for="questions">Questions</label><textarea id="questions" name="questions" placeholder="Anything you'd like us to prepare for the call?"></textarea></div>
+          <label class="check"><input type="checkbox" name="consent" value="yes" required /> <span>Yes, I'd like to receive updates and offers from Stallion Developments by email and phone. I can unsubscribe at any time.</span></label>
+          <button class="btn btn-solid btn-lg" type="submit">Request a confidential conversation</button>
+          <p class="micro recaptcha-note">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
+        </form>
+        <div class="form-success"><h3>Thank you.</h3><p>A member of our investor relations team will be in touch within 2 business days.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+</Layout>

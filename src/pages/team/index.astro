@@ -1,85 +1,33 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 
+const ORG = { "@id": "https://www.stalliondevelopments.com/#org" };
+const person = (name, jobTitle, image, extra = {}) => ({
+  "@context": "https://schema.org", "@type": "Person", name, jobTitle,
+  image: `https://www.stalliondevelopments.com/assets/team/${image}`, worksFor: ORG, ...extra,
+});
+// sameAs (LinkedIn) goes on each Person once the links are in
 const schema = [
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Akram Hanna",
-    "jobTitle": "Chief Executive Officer",
-    "image": "https://www.stalliondevelopments.com/assets/team/team1.png",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Stallion Developments"
-    }
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Mohamed Nassrat",
-    "jobTitle": "Partner, Construction",
-    "image": "https://www.stalliondevelopments.com/assets/team/team2.png",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Stallion Developments"
-    }
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Khaled El-Shayeb",
-    "jobTitle": "Partner, Construction & Design",
-    "image": "https://www.stalliondevelopments.com/assets/team/team3.png",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Stallion Developments"
-    }
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Ragy Moussa",
-    "jobTitle": "Partner, Sales & Marketing",
-    "image": "https://www.stalliondevelopments.com/assets/team/team4.png",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Stallion Developments"
-    }
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Ali El-Shayeb",
-    "jobTitle": "Partner, Operations & Growth",
-    "image": "https://www.stalliondevelopments.com/assets/team/team5.png",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Stallion Developments"
-    }
-  },
+  person("Mohamed Nassrat", "President", "team2.png"),
+  person("Akram Hanna", "Partner, Construction", "team1.png", {
+    hasCredential: { "@type": "EducationalOccupationalCredential", credentialCategory: "license", name: "Professional Engineer (P.Eng.), Ontario" },
+  }),
+  person("Ali El-Shayeb", "Partner, Marketing & Technology", "team5.png"),
+  person("Khaled El-Shayeb", "Partner, Construction & Design", "team3.png"),
+  person("Ragy Moussa", "Partner, Sales & Marketing", "team4.png"),
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.stalliondevelopments.com/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Our Team",
-        "item": "https://www.stalliondevelopments.com/team/"
-      }
-    ]
-  }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.stalliondevelopments.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Our Team", "item": "https://www.stalliondevelopments.com/team/" },
+    ],
+  },
 ];
 ---
 <Layout
-  title="Our Team | Stallion Developments Leadership & Builders"
-  description="Meet the engineers, builders, designers and dealmakers behind Stallion Developments, with 75+ years of combined experience in Ontario real estate development."
+  title="Our Team | Stallion Developments, Ontario Home Builder"
+  description="Meet the five partners behind Stallion Developments, covering engineering, construction, design and sales, with 75+ years of combined building experience."
   path="team/"
   current="team"
   schema={schema}
@@ -91,8 +39,8 @@ const schema = [
       <div>
         <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a><span>/</span>Our Team</nav>
         <span class="eyebrow">Meet the team</span>
-        <h1>The people behind every Stallion home</h1>
-        <p class="lede" style="max-width:62ch">Engineers, builders, designers and dealmakers with 75+ years of combined experience across real estate development, construction management, new home sales, technology and capital markets. We invest our own capital in every project we build.</p>
+        <h1>The people who design, build and stand behind your home.</h1>
+        <p class="lede" style="max-width:62ch">Stallion Developments is run by five partners who cover engineering, construction, design and sales. Between us we have 75+ years of building experience and more than $150M in completed projects in Canada and abroad.</p><!-- CONFIRM: combined years; named past projects backing the $150M+ figure -->
         <div class="values-strip"><span>Accountable</span><span>Hands-on</span><span>Transparent</span><span>Invested</span></div>
       </div>
     </div>
@@ -100,22 +48,31 @@ const schema = [
 
   <section class="section">
     <div class="wrap">
-      <article class="partner reveal">
-        <img src="../assets/team/team1.png" alt="Akram Hanna, Chief Executive Officer" loading="lazy" />
+<article class="partner reveal">
+        <img src="../assets/team/team2.png" alt="Mohamed Nassrat, President" loading="lazy" />
         <div>
-          <h2>Akram Hanna</h2>
-          <p class="role">Chief Executive Officer</p>
-          <p>Akram has 25+ years in infrastructure and real estate development. He's a licensed Professional Engineer in Ontario (20+ years) and a Tarion-registered new home builder (10+ years). He sets the standard for how every Stallion home is engineered and built, and he's accountable to homeowners and investors alike.</p>
-          <div class="tags"><span class="tag">P.Eng.</span><span class="tag">Tarion builder</span><span class="tag">Development &amp; construction</span></div>
+          <h2>Mohamed Nassrat</h2>
+          <p class="role">President</p>
+          <p>Leads Stallion's development strategy, land pipeline and approvals across Bracebridge, Kitchener and Prince Edward County. He is the founder and former chairman of a leading MENA construction firm with $1B+ in contracts.</p><!-- CONFIRM: credentials and 1–2 past projects (the MENA line is from the previous bio until they arrive); LinkedIn -->
+          <div class="tags"><span class="tag">Development strategy</span><span class="tag">Land &amp; approvals</span><span class="tag">Large-scale construction</span></div>
         </div>
       </article>
       <article class="partner reveal">
-        <img src="../assets/team/team2.png" alt="Mohamed Nassrat, Partner, Construction" loading="lazy" />
+        <img src="../assets/team/team1.png" alt="Akram Hanna, Partner, Construction" loading="lazy" />
         <div>
-          <h2>Mohamed Nassrat</h2>
+          <h2>Akram Hanna</h2>
           <p class="role">Partner, Construction</p>
-          <p>Mohamed is the founder and former chairman of a leading MENA construction firm with $1B+ in contracts. He's a seasoned CEO with deep expertise in large-scale development and strategic asset management, and he brings institutional discipline to Stallion's budgets, schedules and procurement.</p>
-          <div class="tags"><span class="tag">Large-scale construction</span><span class="tag">Asset management</span><span class="tag">International</span></div>
+          <p>Founder of Hanna Homes Construction, which is managing the build at Maple Place. Owns schedule, trades and site quality on every Stallion home. A licensed Professional Engineer in Ontario (20+ years) and a Tarion-registered new home builder (10+ years).</p><!-- CONFIRM: 1–2 past projects; LinkedIn -->
+          <div class="tags"><span class="tag">P.Eng.</span><span class="tag">Tarion builder</span><span class="tag">Construction</span></div>
+        </div>
+      </article>
+      <article class="partner reveal">
+        <img src="../assets/team/team5.png" alt="Ali El-Shayeb, Partner, Marketing &amp; Technology" loading="lazy" />
+        <div>
+          <h2>Ali El-Shayeb</h2>
+          <p class="role">Partner, Marketing &amp; Technology</p>
+          <p>Founder and CEO of Islands, a Toronto-based product and venture studio, and a two-time exited founder. Leads sales, marketing and the digital experience for Stallion buyers and investors.</p><!-- CONFIRM: LinkedIn -->
+          <div class="tags"><span class="tag">Marketing</span><span class="tag">Technology</span><span class="tag">Venture studio</span></div>
         </div>
       </article>
       <article class="partner reveal">
@@ -126,7 +83,7 @@ const schema = [
           <p>Khaled has 25+ years of interior design and construction experience, delivering projects for brands including Hero Burgers, Baskin Robbins and Patchi. He shapes the look, feel and finish quality of every Stallion home, so each one is designed to sell and built to last.</p>
           <div class="tags"><span class="tag">Interior design</span><span class="tag">Commercial &amp; residential</span><span class="tag">Finishes</span></div>
         </div>
-      </article>
+      </article><!-- CONFIRM: role at Stallion, background and LinkedIn (bio unchanged until the new one arrives) -->
       <article class="partner reveal">
         <img src="../assets/team/team4.png" alt="Ragy Moussa, Partner, Sales &amp; Marketing" loading="lazy" />
         <div>
@@ -135,16 +92,8 @@ const schema = [
           <p>Ragy is an award-winning real estate broker with 15+ years in GTA markets and multiple Royal LePage Director's and President's awards. He's also CEO of Moussa Homes, with a track record in residential sales and new construction, and he leads Stallion's pricing, sales and buyer experience.</p>
           <div class="tags"><span class="tag">Broker</span><span class="tag">Royal LePage awards</span><span class="tag">New construction sales</span></div>
         </div>
-      </article>
-      <article class="partner reveal">
-        <img src="../assets/team/team5.png" alt="Ali El-Shayeb, Partner, Operations &amp; Growth" loading="lazy" />
-        <div>
-          <h2>Ali El-Shayeb</h2>
-          <p class="role">Partner, Operations &amp; Growth</p>
-          <p>Ali is a serial entrepreneur with two successful technology exits and the CEO of Islands, an AI-native product and venture studio. He leads Stallion's operations, systems and investor relations, with a track record of scaling businesses and raising private capital.</p>
-          <div class="tags"><span class="tag">Operations</span><span class="tag">Capital raising</span><span class="tag">Technology</span></div>
-        </div>
-      </article>
+      </article><!-- CONFIRM: role at Stallion, background and LinkedIn (bio unchanged until the new one arrives) -->
+
     </div>
   </section>
 
@@ -152,7 +101,7 @@ const schema = [
     <div class="wrap reveal">
       <h2>Build with us.</h2>
       <p>Buy a home, invest in a project or bring us a site. Whichever it is, you'll deal directly with the partners.</p>
-      <div class="hero-ctas"><a class="btn btn-light btn-lg" href="../communities/">Explore communities</a><a class="btn btn-ghost btn-lg" style="border-color:rgba(242,239,231,0.45);color:var(--on-dark)" href="../invest/">Invest with us</a></div>
+      <div class="hero-ctas"><a class="btn btn-light btn-lg" href="../communities/">Explore communities</a><a class="btn btn-ghost btn-lg" style="border-color:rgba(242,239,231,0.45);color:var(--on-dark)" href="../investors/">Investors</a></div>
     </div>
   </section>
 </main>

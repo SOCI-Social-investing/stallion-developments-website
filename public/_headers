@@ -1,0 +1,5 @@
+# Cloudflare Pages response headers. The pages.dev address is staging: keep it out of
+# search results so only www.stalliondevelopments.com gets indexed. (Branch previews
+# on *.stallion-developments.pages.dev are noindexed by Cloudflare already.)
+https://stallion-developments.pages.dev/*
+  X-Robots-Tag: noindex

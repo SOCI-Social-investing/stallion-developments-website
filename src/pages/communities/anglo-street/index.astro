@@ -1,7 +1,17 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
+import CommunityCards from "../../../components/CommunityCards.astro";
+import InvestorBand from "../../../components/InvestorBand.astro";
 
 const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Residence",
+    "name": "Anglo Street",
+    "url": "https://www.stalliondevelopments.com/communities/anglo-street/",
+    "description": "Semi-detached homes on a 1-acre site on Anglo Street, Bracebridge, from the builder of Maple Place.",
+    "address": { "@type": "PostalAddress", "addressLocality": "Bracebridge", "addressRegion": "ON", "addressCountry": "CA" },
+  },
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -22,16 +32,16 @@ const schema = [
         "@type": "ListItem",
         "position": 3,
         "name": "Anglo Street",
-        "item": "https://www.stalliondevelopments.com/communities/anglo-street-bracebridge/"
+        "item": "https://www.stalliondevelopments.com/communities/anglo-street/"
       }
     ]
   }
 ];
 ---
 <Layout
-  title="Anglo Street | New Homes Coming to Bracebridge, Muskoka"
-  description="Anglo Street by Stallion Developments: a new collection of semi-detached homes on one acre in Bracebridge, Muskoka. Register for first access and floor plans."
-  path="communities/anglo-street-bracebridge/"
+  title="New Semi-Detached Homes Coming to Bracebridge | Anglo Street"
+  description="A new community of semi-detached homes on a 1-acre site on Anglo Street, Bracebridge, by the builder of Maple Place. Join the waitlist."
+  path="communities/anglo-street/"
   current="communities"
   schema={schema}
 >
@@ -41,12 +51,11 @@ const schema = [
     <div class="wrap">
       <div>
         <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../../">Home</a><span>/</span><a href="../../communities/">Communities</a><span>/</span>Anglo Street</nav>
-        <span class="status-label soon"><span class="dot"></span>Coming soon · Bracebridge, Muskoka</span>
-        <h1>Anglo Street: new semi-detached homes coming to Bracebridge</h1>
-        <p class="lede" style="font-family:var(--font-display);font-style:italic;color:var(--moss);font-size:clamp(1.4rem,2vw,1.8rem)">The next chapter of Bracebridge.</p>
-        <p class="lede">Following Maple Place, Anglo Street brings a new collection of semi-detached homes to a one-acre site in Bracebridge. It's designed with the same approach: generous layouts, private outdoor space and a location that keeps the best of Muskoka close by. Registrants get first access to floor plans, pricing and lot selection.</p>
-        <div class="chips"><span class="chip">Semi-detached homes</span><span class="chip">1 acre</span><span class="chip">Bracebridge, Muskoka</span></div><!-- CONFIRM: # of homes, sizes, launch date -->
-        <div class="hero-ctas"><a class="btn btn-solid" href="#register">Register for first access</a></div>
+        <span class="status-label soon"><span class="dot"></span>Delivering Q4 2028 · Bracebridge, Muskoka</span>
+        <h1>Coming soon: new semi-detached homes on Anglo Street, Bracebridge.</h1>
+        <p class="lede">Anglo Street is Stallion's second Bracebridge community: a small collection of semi-detached homes on a 1-acre site, from the builder of Maple Place. Plans are underway, with the first homes expected to be delivered in Q4 2028. Join the waitlist for first access to floor plans, pricing and the sales launch date.</p>
+        <div class="chips"><span class="chip">Semi-detached homes</span><span class="chip">1-acre site</span><span class="chip">Bracebridge, Muskoka</span></div><!-- CONFIRM: home count and release timing -->
+        <div class="hero-ctas"><a class="btn btn-solid" href="#register">Join the waitlist</a></div>
       </div>
       <div class="hero-media reveal"><div class="card-media placeholder" style="aspect-ratio:1;border-radius:18px"><span class="ph-mark">AS</span></div></div>
     </div>
@@ -79,11 +88,11 @@ const schema = [
     <div class="wrap form-layout">
       <div class="sticky reveal">
         <span class="eyebrow">Register</span>
-        <h2 class="h2" style="margin-top:0.8rem">Register for first access</h2>
+        <h2 class="h2" style="margin-top:0.8rem">Join the waitlist</h2>
         <p class="ink-soft" style="margin-top:1rem;font-size:1.08rem">Registrants get first access to floor plans, pricing and lot selection before the public release.</p>
       </div>
       <div>
-        <form class="form reveal" method="post" data-endpoint="" data-form="anglo-street-bracebridge-register" data-form-type="floor_plan">
+        <form class="form reveal" method="post" data-endpoint="" data-form="anglo-street-register" data-form-type="floor_plan">
           <input type="hidden" name="community" value="Anglo Street" />
           <div class="row"><div class="field"><label for="first_name">First name*</label><input id="first_name" name="first_name" type="text" required placeholder="" /></div><div class="field"><label for="last_name">Last name*</label><input id="last_name" name="last_name" type="text" required placeholder="" /></div></div>
           <div class="row"><div class="field"><label for="email">Email*</label><input id="email" name="email" type="email" required placeholder="" /></div><div class="field"><label for="phone">Phone*</label><input id="phone" name="phone" type="tel" required placeholder="" /></div></div>
@@ -92,7 +101,7 @@ const schema = [
           <label class="check"><input type="checkbox" name="agent" value="yes" /> <span>I am a real estate agent</span></label>
           <div class="field"><label for="questions">Questions</label><textarea id="questions" name="questions" placeholder="Anything you'd like to know?"></textarea></div>
           <label class="check"><input type="checkbox" name="consent" value="yes" required /> <span>Yes, I'd like to receive updates, floor plans and offers from Stallion Developments by email and phone. I can unsubscribe at any time.</span></label>
-          <button class="btn btn-solid btn-lg" type="submit">Register for first access</button>
+          <button class="btn btn-solid btn-lg" type="submit">Join the waitlist</button>
           <p class="micro recaptcha-note">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
         </form>
         <div class="form-success"><h3>You're on the list.</h3><p>We'll send you the release package for Anglo Street as soon as it's ready, and a member of our sales team will be in touch within one business day.</p></div>
@@ -100,55 +109,12 @@ const schema = [
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap">
-      <div class="band-cta reveal">
-        <div>
-          <span class="eyebrow">For investors</span>
-          <h2>Build wealth alongside the builders.</h2>
-          <p>We offer qualified investors access to Ontario residential development through second-mortgage secured private debt, at conservative loan-to-value ratios and with partner capital invested ahead of yours.</p>
-          <div class="chips"><span class="chip">Second-mortgage security</span><span class="chip">40% LTV</span><span class="chip">Partner capital first-in</span><span class="chip">Monthly reporting</span></div>
-        </div>
-        <aside>
-          <a class="btn btn-light btn-lg" href="../../invest/">Explore investment opportunities</a>
-          <p class="micro">For accredited investors only. All investments carry risk. Returns are not guaranteed.</p>
-        </aside>
-      </div>
-    </div>
-  </section>
+  <InvestorBand />
 
   <section class="section no-top">
     <div class="wrap">
       <div class="section-head reveal"><span class="eyebrow">Other communities</span><h2>More from Stallion</h2></div>
-      <div class="card-grid cols-3">
-      <a class="community-card reveal" href="../../communities/maple-place-bracebridge/" data-tags="muskoka selling">
-        <div class="card-media"><img src="../../assets/img/maple-exterior.webp" alt="Maple Place semi-detached home exterior, Bracebridge Muskoka" loading="lazy" /><span class="status-label"><span class="dot"></span>Now selling</span></div>
-        <div class="card-body">
-          <h3>Maple Place</h3>
-          <p class="card-desc">Walk-to-downtown living in the Heart of Muskoka</p>
-          <p class="card-meta">Semi-detached homes · Bracebridge</p>
-          <span class="link-arrow">Register</span>
-        </div>
-      </a>
-      <a class="community-card reveal" href="../../communities/chicopee-heights-kitchener/" data-tags="waterloo soon">
-        <div class="card-media placeholder"><span class="ph-mark">CH</span><span class="status-label soon"><span class="dot"></span>Coming soon</span></div>
-        <div class="card-body">
-          <h3>Chicopee Heights</h3>
-          <p class="card-desc">Detached family homes in Waterloo Region</p>
-          <p class="card-meta">Detached homes · Kitchener · 3 acres</p>
-          <span class="link-arrow">Register interest</span>
-        </div>
-      </a>
-      <a class="community-card reveal" href="../../communities/lady-of-the-woods-prince-edward-county/" data-tags="pec soon">
-        <div class="card-media placeholder"><span class="ph-mark">LW</span><span class="status-label soon"><span class="dot"></span>Coming soon</span></div>
-        <div class="card-body">
-          <h3>Lady of the Woods Estate Homes</h3>
-          <p class="card-desc">Estate living on 24 acres in Prince Edward County</p>
-          <p class="card-meta">Estate homes · Prince Edward County</p>
-          <span class="link-arrow">Register interest</span>
-        </div>
-      </a>
-    </div>
+      <CommunityCards exclude="anglo-street" />
       <p class="disclaimer" style="margin-top:2.5rem">Renderings are artist's concepts only and may not reflect final construction details, finishes or landscaping. Specifications, pricing and availability are subject to change without notice. E.&amp;O.E.</p>
     </div>
   </section>

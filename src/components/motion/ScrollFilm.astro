@@ -197,7 +197,30 @@ const vars = [
     .film-runway { height: var(--film-runway-mobile); }
   }
 
+  /* A still per band section, shown only when the film is static */
+  .band-still { display: none; }
+
   @media (prefers-reduced-motion: reduce) {
     .marquee-wrap { display: none; }
+  }
+
+  /* Reduced motion (set by scroll-film.js): the sections stack in the page flow */
+  .scroll-film.film-static .film-loader,
+  .scroll-film.film-static .canvas-wrap,
+  .scroll-film.film-static .film-overlay,
+  .scroll-film.film-static .marquee-wrap,
+  .scroll-film.film-static .film-runway { display: none; }
+  .scroll-film.film-static .band { position: static; pointer-events: auto; }
+  .scroll-film.film-static .band-section {
+    position: relative; inset: auto; visibility: visible; opacity: 1;
+    display: grid; grid-template-columns: minmax(0, var(--film-text-col)) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 4rem); align-items: center;
+    padding: clamp(5.5rem, 10vh, 7rem) var(--gutter) clamp(2rem, 6vh, 4rem);
+  }
+  .scroll-film.film-static .band-still {
+    display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 16px;
+  }
+  @media (max-width: 860px) {
+    .scroll-film.film-static .band-section { grid-template-columns: 1fr; }
   }
 </style>

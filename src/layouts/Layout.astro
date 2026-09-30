@@ -12,7 +12,7 @@ interface Props {
   /** Path on the production domain, e.g. "communities/" ("" for home) */
   path: string;
   /** Nav item to mark as the current page */
-  current?: "communities" | "invest" | "team" | "contact";
+  current?: "communities" | "why" | "team" | "investors" | "contact";
   ogImage?: string;
   /** Extra JSON-LD objects (breadcrumbs, FAQ, people…); the Organization block is always included */
   schema?: object[];
@@ -23,20 +23,18 @@ interface Props {
 const { title, description, path, current, ogImage = "assets/img/maple-exterior.webp", schema = [], variant = "inner" } = Astro.props;
 const canonical = absolute(path);
 
+// Every page (client copy doc, "Structured data"). logo and sameAs are left out until
+// there is a logo file and the LinkedIn / Google Business Profile URLs exist.
 const ORGANIZATION = {
   "@context": "https://schema.org",
-  "@type": ["Organization", "HomeAndConstructionBusiness"],
+  "@type": "HomeAndConstructionBusiness",
+  "@id": `${SITE_URL}/#org`,
   name: "Stallion Developments",
-  url: SITE_URL,
+  url: `${SITE_URL}/`,
   email: "info@stalliondevelopments.com",
-  description: "Premium new homes and development opportunities across Ontario, from the Heart of Muskoka to Prince Edward County and Waterloo Region.",
-  areaServed: [
-    { "@type": "Place", name: "Bracebridge, Ontario" },
-    { "@type": "Place", name: "Muskoka, Ontario" },
-    { "@type": "Place", name: "Kitchener, Ontario" },
-    { "@type": "Place", name: "Prince Edward County, Ontario" },
-  ],
-  slogan: "Built with intent.",
+  description: "Engineer-led, Tarion-registered Ontario home builder building new homes in Bracebridge, Kitchener and Prince Edward County.",
+  address: { "@type": "PostalAddress", streetAddress: "243 Maple Street", addressLocality: "Bracebridge", addressRegion: "ON", addressCountry: "CA" },
+  areaServed: ["Bracebridge", "Muskoka", "Kitchener", "Prince Edward County"],
 };
 // Google Tag Manager container; GA4 (G-5FQENJ8PYL) and the form key events are configured inside GTM.
 // Leave empty and no tracking loads.

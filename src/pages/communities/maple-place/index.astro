@@ -1,0 +1,276 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import ScrollScrub from "../../../components/motion/ScrollScrub.astro";
+import CommunityCards from "../../../components/CommunityCards.astro";
+import InvestorBand from "../../../components/InvestorBand.astro";
+
+/* Maple Place FAQ: the visible questions and the FAQPage markup share this list, word for word */
+const faq = [
+  ["How much are the homes at Maple Place?", "Pricing starts at $900,000. Register for the current price list."],
+  ["When can I move in?", "Occupancy is targeted for Summer 2027."],
+  ["Is the lower level finished?", "Yes. Every home has a finished lower level with its own separate entrance."],
+  ["Can the lower level be rented?", "Yes. Each lower level has its own separate entrance and can be rented out as a suite, which can help cover the mortgage."],
+  ["Are the homes covered by Tarion?", "Yes. Every home comes with Ontario's Tarion new home warranty."],
+  ["What's the deposit structure?", "A total deposit of 10% of the purchase price, paid in three steps: $20,000 on signing, $25,000 in 30 days and $45,000 in 90 days ($90,000 on a $900,000 home). Your full deposit is protected by Tarion, which covers freehold deposits up to 10% of the price, to a maximum of $100,000. The balance is due on closing."],
+  ["How far is Maple Place from downtown Bracebridge?", "About a 5-minute walk."],
+];
+const PAGE = "https://www.stalliondevelopments.com/communities/maple-place/";
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Residence",
+    "name": "Maple Place",
+    "url": PAGE,
+    "description": "Four new semi-detached homes in Bracebridge, Muskoka: 3 bedrooms, 2.5 baths, about 1,900 sq ft above ground plus a finished lower level with separate entrance.",
+    "address": { "@type": "PostalAddress", "streetAddress": "243-249 Maple Street", "addressLocality": "Bracebridge", "addressRegion": "ON", "addressCountry": "CA" },
+    "containedInPlace": { "@type": "City", "name": "Bracebridge" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faq.map(([q, a]) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.stalliondevelopments.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Communities", "item": "https://www.stalliondevelopments.com/communities/" },
+      { "@type": "ListItem", "position": 3, "name": "Maple Place", "item": PAGE },
+    ],
+  },
+];
+// geo (latitude/longitude) goes in the Residence block once the coordinates are confirmed
+---
+<Layout
+  title="New Semi-Detached Homes in Bracebridge, Muskoka | Maple Place"
+  description="4 new semi-detached homes on Maple Street, Bracebridge. 3 bed, 2.5 bath, finished lower level with separate entrance. Walk to downtown. Register for pricing."
+  path="communities/maple-place/"
+  current="communities"
+  schema={schema}
+>
+
+<main class="page">
+  <!-- Four-seasons hero: sticky hero, the card scrubs through the year as you scroll (frames/seasons) -->
+  <div class="scrub-runway" id="seasons">
+  <section class="page-hero has-media sticky-hero">
+    <div class="wrap">
+      <div>
+        <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../../">Home</a><span>/</span><a href="../../communities/">Communities</a><span>/</span>Maple Place</nav>
+        <span class="status-label"><span class="dot"></span>Now selling · Maple Street, Bracebridge</span>
+        <h1>New semi-detached homes in Bracebridge, a short walk from downtown.</h1>
+        <p class="lede">Four homes. Room to grow, room for guests, and the best of Muskoka on your doorstep.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-solid" href="#register">Get floor plans &amp; pricing</a>
+          <a class="btn btn-ghost" href="../../register/?community=Maple%20Place">Book a site visit</a>
+        </div>
+        <div class="badge-strip"><span>Tarion new home warranty</span><span>Engineer-led</span></div>
+      </div>
+      <div class="hero-media seasons-card reveal">
+        <ScrollScrub frames="frames/seasons/se_" count={183} poster="assets/img/maple-exterior.webp" runway="#seasons"
+                     timeline="0:0,0.08:0,0.34:60,0.40:61,0.66:121,0.72:122,0.98:182,1:182"
+                     role="img" aria-label="Maple Place semi-detached home exterior through summer, fall, winter and spring, Bracebridge Muskoka" />
+        <ol class="season-tabs" aria-hidden="true">
+          <li data-at="0">Summer</li>
+          <li data-at="0.30">Fall</li>
+          <li data-at="0.62">Winter</li>
+          <li data-at="0.94">Spring</li>
+        </ol>
+        <p class="season-caption">Built for every season. Full-time living as well as weekends.</p>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <!-- Quick answer: plain text for search and AI tools to quote -->
+  <section class="section quick-answer">
+    <div class="wrap-narrow">
+      <p class="lede reveal">Maple Place is a community of four new semi-detached homes at 243–249 Maple Street in Bracebridge, Ontario, built by Stallion Developments. Each home has 3 bedrooms, 2.5 bathrooms, about 1,900 sq ft above ground and a finished lower level with its own entrance. Pricing starts at $900,000 plus HST, with occupancy targeted for summer 2027.</p><!-- CONFIRM: starting price and whether it's quoted plus HST; occupancy target; above-ground sq ft (1,900 vs about 1,950 in earlier notes) -->
+    </div>
+  </section>
+
+  <!-- Specs + the lower level (the main selling point) -->
+  <section class="section paper" id="details">
+    <div class="wrap form-layout">
+      <div class="reveal">
+        <span class="eyebrow">Home details</span>
+        <h2 class="h2" style="margin:0.8rem 0 1.4rem">The homes</h2>
+        <dl class="terms compact">
+          <div><dt>Home type</dt><dd>Semi-detached, 2 storeys</dd></div>
+          <div><dt>Bedrooms / baths</dt><dd>3 bed, 2.5 bath</dd></div>
+          <div><dt>Size</dt><dd>1,900+ sq ft above ground, plus finished lower level</dd></div>
+          <div><dt>Lower level</dt><dd>Finished, with separate entrance</dd></div>
+          <div><dt>Lot</dt><dd>33' x 108', deep private yard</dd></div>
+          <div><dt>Warranty</dt><dd>Tarion new home warranty</dd></div>
+          <div><dt>Price</dt><dd>From $900,000</dd></div>
+          <div><dt>Occupancy</dt><dd>Summer 2027</dd></div>
+        </dl>
+      </div>
+      <div class="reveal lower-level">
+        <span class="eyebrow">The lower level</span>
+        <h2 style="margin-top:0.8rem">A finished lower level with its own front door.</h2>
+        <p>Every home at Maple Place comes with a finished lower level and a separate entrance. Use it as a suite for parents or grown kids, a private space for summer guests, a home office, or a rental suite to help with the mortgage. It's space most new homes in Muskoka don't offer.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inside the home -->
+  <section class="section" id="inside">
+    <div class="wrap statement">
+      <h2 class="reveal">Open, bright and built to last.</h2>
+      <div class="reveal">
+        <p>The main floor is one open space for cooking, eating and relaxing, with large windows front and back. Upstairs are three bedrooms, including a primary bedroom with its own ensuite and walk-in closet. Finishes include 9-foot ceilings on the main floor, wide-plank engineered hardwood, quartz kitchen counters with an island, and a covered front porch.</p><!-- CONFIRM: finish specs and the primary ensuite -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Floor plans (gated) -->
+  <section class="section" id="floor-plans">
+    <div class="wrap">
+      <div class="split-head">
+        <div class="section-head reveal">
+          <span class="eyebrow">Floor plans</span>
+          <h2>Floor plans</h2>
+          <p>Two mirrored plans with 3 bedrooms, 2.5 baths and 1,900 sq ft above ground. Get the full floor plan and pricing package in under a minute.</p>
+        </div>
+        <div class="reveal" style="display:grid;gap:0.5rem;justify-items:end"><a class="btn btn-solid" href="#register">Get floor plans &amp; pricing</a><span class="micro">Delivered to your inbox instantly. PDF.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="section no-top" id="gallery">
+    <div class="wrap">
+      <div class="gallery reveal">
+        <figure><img src="../../assets/img/maple-aerial.webp" alt="Aerial rendering of Maple Place semi-detached homes on Maple Street, Bracebridge" loading="lazy" /><figcaption>Aerial view, Maple Street. Artist's concept.</figcaption></figure>
+        <figure><img src="../../assets/img/maple-backyard.webp" alt="Rear elevation of Maple Place semi-detached homes with deck, fire pit and deep private yard" loading="lazy" /><figcaption>Rear elevation and yard. Artist's concept.</figcaption></figure>
+        <figure><img src="../../assets/img/maple-living.webp" alt="Maple Place open-concept living room with granite fireplace" loading="lazy" /><figcaption>Living room. Artist's concept.</figcaption></figure>
+        <figure><img src="../../assets/img/maple-kitchen.webp" alt="Maple Place open-concept kitchen with island and view to the deck" loading="lazy" /><figcaption>Kitchen. Artist's concept.</figcaption></figure>
+        <figure><img src="../../assets/img/maple-deck.webp" alt="View from the rear deck of a Maple Place home over the private backyard and pines" loading="lazy" /><figcaption>From the deck. Artist's concept.</figcaption></figure>
+        <figure><img src="../../assets/img/maple-site.webp" alt="Maple Place foundation and site preparation on Maple Street, Bracebridge" loading="lazy" /><figcaption>Site preparation, 243–249 Maple Street.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location -->
+  <section class="section paper" id="location">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Location</span>
+        <h2>Walk to downtown. Drive to the lake.</h2>
+        <p>Maple Street is a quiet residential street in the heart of Bracebridge.</p>
+      </div>
+      <div class="nearby">
+        <div class="nearby-card reveal"><span class="dist">~5-minute walk</span><h3>Downtown Bracebridge &amp; Manitoba Street</h3></div>
+        <div class="nearby-card reveal"><span class="dist">~7-minute walk</span><h3>Bracebridge Falls</h3></div>
+        <div class="nearby-card reveal"><span class="dist">~10-minute drive</span><h3>Lake Muskoka</h3></div>
+        <div class="nearby-card reveal"><span class="dist">~5-minute drive</span><h3>Highway 11</h3></div>
+        <div class="nearby-card reveal"><span class="dist">~2 hours</span><h3>Toronto</h3></div>
+      </div><!-- CONFIRM: walk and drive times from Maple Street -->
+    </div>
+  </section>
+
+  <!-- Why Bracebridge -->
+  <section class="section" id="why-bracebridge">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">Why Bracebridge</span><h2>Why Bracebridge</h2></div>
+      <div class="why-grid">
+        <div class="why-card reveal"><h3>A year-round town, not just a summer stop.</h3><p>Bracebridge has 17,305 permanent residents, and it's the seat of the District of Muskoka's government.</p></div>
+        <div class="why-card reveal"><h3>Growth that's planned.</h3><p>Muskoka's growth strategy anticipates 16,150 new permanent housing units between 2021 and 2051.</p></div>
+        <div class="why-card reveal"><h3>Limited new supply near downtown.</h3><p>New homes this close to Muskoka's Downtown are rare, and it shows in the pricing: homes near Maple Street have sold at a premium to the town average.</p></div><!-- CONFIRM: refresh the 18% / $869K vs $734K stat with 2026 data before publishing -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Built by Stallion -->
+  <section class="section paper" id="built-by">
+    <div class="wrap trust">
+      <div class="reveal">
+        <span class="eyebrow">The builder</span>
+        <h2>Built by Stallion.</h2>
+        <p>Maple Place is designed and built by Stallion Developments, an engineer-led Ontario builder. Our own team manages the build from start to finish, and every home is enrolled with Tarion.</p>
+      </div>
+      <div class="badges reveal">
+        <div class="badge">Tarion new home warranty</div>
+        <div class="badge">Engineer-led</div>
+        <div class="badge">In-house construction</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="section" id="timeline">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">Construction timeline</span><h2>Where we are</h2></div>
+      <ol class="timeline reveal">
+        <li class="done"><span class="tl-status">Complete</span><h3>Land acquisition</h3></li>
+        <li class="done"><span class="tl-status">Approved</span><h3>Site plan and permits</h3></li>
+        <li class="done"><span class="tl-status">July 2025</span><h3>Construction start</h3></li>
+        <li class="now"><span class="tl-status">Now open</span><h3>Pre-construction sales</h3></li>
+        <li><span class="tl-status">Summer 2027 (target)</span><h3>Occupancy</h3></li><!-- CONFIRM: occupancy target -->
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="wrap-narrow">
+      <div class="section-head reveal"><h2>Frequently asked questions</h2></div>
+      <div class="faq reveal">
+        {faq.map(([q, a]) => (
+          <details>
+            <summary>{q}</summary>
+            <div class="answer"><p>{a}</p></div>
+          </details>
+        ))}
+      </div><!-- CONFIRM: deposit structure -->
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="section pine final-cta">
+    <div class="wrap reveal">
+      <h2>Only four homes. Be first in line.</h2>
+      <p>Register for floor plans, pricing and a private site visit.</p>
+      <div class="hero-ctas"><a class="btn btn-light btn-lg" href="#register">Register now</a></div>
+    </div>
+  </section>
+
+  <!-- Register -->
+  <section class="section paper" id="register">
+    <div class="wrap form-layout">
+      <div class="sticky reveal">
+        <span class="eyebrow">Register</span>
+        <h2 class="h2" style="margin-top:0.8rem">Get floor plans &amp; pricing</h2>
+        <p class="ink-soft" style="margin-top:1rem;font-size:1.08rem">Limited stock available. Register now for the full package and first access.</p>
+        <p class="micro" style="margin-top:1.4rem">Delivered to your inbox instantly. A member of our sales team follows up within one business day.</p>
+      </div>
+      <div>
+        <form class="form reveal" method="post" data-endpoint="" data-form="maple-place-register" data-form-type="floor_plan">
+          <input type="hidden" name="community" value="Maple Place" />
+          <div class="row"><div class="field"><label for="first_name">First name*</label><input id="first_name" name="first_name" type="text" required placeholder="" /></div><div class="field"><label for="last_name">Last name*</label><input id="last_name" name="last_name" type="text" required placeholder="" /></div></div>
+          <div class="row"><div class="field"><label for="email">Email*</label><input id="email" name="email" type="email" required placeholder="" /></div><div class="field"><label for="phone">Phone*</label><input id="phone" name="phone" type="tel" required placeholder="" /></div></div>
+          <div class="row"><div class="field"><label for="postal_code">Postal code*</label><input id="postal_code" name="postal_code" type="text" required placeholder="" /></div><div class="field"><label for="purpose">This home would be my…</label><select id="purpose" name="purpose"><option value="" disabled selected>Select…</option><option value="Primary residence">Primary residence</option><option value="Weekend or seasonal home">Weekend or seasonal home</option><option value="Investment property">Investment property</option><option value="Downsizing">Downsizing</option></select></div></div>
+          <div class="row"><div class="field"><label for="timeline">When do you plan to move?*</label><select id="timeline" name="timeline" required><option value="" disabled selected>Select…</option><option value="0–3 months">0–3 months</option><option value="3–6 months">3–6 months</option><option value="6–12 months">6–12 months</option><option value="12+ months">12+ months</option></select></div><div class="field"><label for="budget">Budget*</label><select id="budget" name="budget" required><option value="" disabled selected>Select…</option><option value="$800K–$900K">$800K–$900K</option><option value="$900K–$1M">$900K–$1M</option><option value="$1M–$1.25M">$1M–$1.25M</option><option value="$1.25M+">$1.25M+</option></select></div></div>
+          <label class="check"><input type="checkbox" name="agent" value="yes" /> <span>I am a real estate agent</span></label>
+          <div class="field"><label for="questions">Questions</label><textarea id="questions" name="questions" placeholder="Anything you'd like to know?"></textarea></div>
+          <label class="check"><input type="checkbox" name="consent" value="yes" required /> <span>Yes, I'd like to receive updates, floor plans and offers from Stallion Developments by email and phone. I can unsubscribe at any time.</span></label>
+          <button class="btn btn-solid btn-lg" type="submit">Send me floor plans &amp; pricing</button>
+          <p class="micro recaptcha-note">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
+        </form>
+        <div class="form-success"><h3>You're on the list.</h3><p>Your Maple Place floor plans and pricing are on their way, and a member of our sales team will be in touch within one business day.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <InvestorBand />
+
+  <!-- Other communities -->
+  <section class="section no-top">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">Other communities</span><h2>More from Stallion</h2></div>
+      <CommunityCards exclude="maple-place" />
+      <p class="disclaimer" style="margin-top:2.5rem">Renderings are artist's concepts only and may not reflect final construction details, finishes or landscaping. Specifications, pricing and availability are subject to change without notice. E.&amp;O.E.</p>
+    </div>
+  </section>
+</main>
+</Layout>
