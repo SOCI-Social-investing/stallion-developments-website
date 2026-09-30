@@ -6,10 +6,11 @@
 
    Cloudflare Pages → Settings → Variables and Secrets:
      RESEND_API_KEY  (secret, required)  Resend key with "Sending access" to mail.stalliondevelopments.com
-     LEAD_TO         (optional)          defaults to info@stalliondevelopments.com
+     LEAD_TO         (optional)          comma-separated recipients; defaults to DEFAULT_TO below
      LEAD_FROM       (optional)          defaults to Stallion Website <website@mail.stalliondevelopments.com> */
 
-const DEFAULT_TO = "info@stalliondevelopments.com";
+// Every lead goes to all of these (one email, both in To:)
+const DEFAULT_TO = ["info@stalliondevelopments.com", "r.moussa@stalliondevelopments.com"];
 const DEFAULT_FROM = "Stallion Website <website@mail.stalliondevelopments.com>";
 // Hosts allowed to post: the production domain and the Cloudflare preview/production URLs
 const ALLOWED_HOSTS = /^(www\.)?stalliondevelopments\.com$|(^|\.)stallion-developments\.pages\.dev$/;
@@ -77,7 +78,7 @@ export async function onRequestPost({ request, env }) {
     headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       from: env.LEAD_FROM || DEFAULT_FROM,
-      to: [env.LEAD_TO || DEFAULT_TO],
+      to: env.LEAD_TO ? env.LEAD_TO.split(",").map((a) => a.trim()).filter(Boolean) : DEFAULT_TO,
       reply_to: email,
       subject,
       text,

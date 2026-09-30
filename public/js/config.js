@@ -2,7 +2,7 @@
    ------------------------------------------------------------------
    FORMS. Every form on the site posts to /api/lead, a Cloudflare Pages Function
    (functions/api/lead.js) that emails each submission through Resend from
-   website@mail.stalliondevelopments.com to info@stalliondevelopments.com, with the
+   website@mail.stalliondevelopments.com to info@ and r.moussa@stalliondevelopments.com, with the
    visitor's address as Reply-To. The form name and page are in the subject and body
    so the team can tell registrations apart. The function needs the RESEND_API_KEY
    secret in Cloudflare Pages → Settings → Variables and Secrets.
