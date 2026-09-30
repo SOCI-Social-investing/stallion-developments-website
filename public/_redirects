@@ -1,4 +1,18 @@
 # Cloudflare Pages redirects (ignored by GitHub Pages). One rule per line: from  to  status
 # Old Webflow site (www.stalliondevelopments.com, crawled 2026-09-29): only / and /maple-place existed.
-/maple-place                   /communities/maple-place-bracebridge/   301
-/maple-place/                  /communities/maple-place-bracebridge/   301
+/maple-place                   /communities/maple-place/   301
+/maple-place/                  /communities/maple-place/   301
+
+# Page URLs changed with the client copy rewrite (2026-09-30); query strings are kept
+/communities/maple-place-bracebridge                     /communities/maple-place/          301
+/communities/maple-place-bracebridge/*                   /communities/maple-place/:splat    301
+/communities/anglo-street-bracebridge                    /communities/anglo-street/         301
+/communities/anglo-street-bracebridge/*                  /communities/anglo-street/:splat   301
+/communities/chicopee-heights-kitchener                  /communities/chicopee-heights/     301
+/communities/chicopee-heights-kitchener/*                /communities/chicopee-heights/:splat 301
+/communities/lady-of-the-woods-prince-edward-county      /communities/lady-of-the-woods/    301
+/communities/lady-of-the-woods-prince-edward-county/*    /communities/lady-of-the-woods/:splat 301
+/invest                        /investors/          301
+/invest/*                      /investors/:splat    301
+/contact                       /register/           301
+/contact/*                     /register/:splat     301

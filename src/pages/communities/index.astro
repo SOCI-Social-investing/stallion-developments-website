@@ -1,5 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import CommunityCards from "../../components/CommunityCards.astro";
+import InvestorBand from "../../components/InvestorBand.astro";
 
 const schema = [
   {
@@ -29,7 +31,7 @@ const schema = [
         "name": "Where does Stallion Developments build?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Stallion Developments builds premium new homes in Ontario. Current communities are in Bracebridge (Muskoka), Kitchener (Waterloo Region) and Prince Edward County."
+          "text": "Stallion Developments builds premium new homes in Ontario. Current communities are in Bracebridge (Muskoka), Kitchener and Prince Edward County."
         }
       },
       {
@@ -37,7 +39,7 @@ const schema = [
         "name": "Is Stallion Developments a Tarion-registered builder?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. Stallion's CEO has been a Tarion-registered builder for more than 10 years, and new homes are covered by the Tarion new home warranty program."
+          "text": "Yes. Every Stallion home is enrolled with Tarion and comes with Ontario's statutory new home warranty."
         }
       },
       {
@@ -45,7 +47,7 @@ const schema = [
         "name": "Are there new homes for sale in Bracebridge right now?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. Maple Place is a boutique collection of semi-detached homes on Maple Street in Bracebridge. Each has 1,900 sq ft above ground, 3 bedrooms and 2.5 bathrooms. Register to receive floor plans and pricing."
+          "text": "Yes. Maple Place is a boutique collection of semi-detached homes on Maple Street in Bracebridge. Each has about 1,900 sq ft above ground, 3 bedrooms, 2.5 bathrooms and a finished lower level with its own entrance. Register to receive floor plans and pricing."
         }
       },
       {
@@ -53,7 +55,7 @@ const schema = [
         "name": "Can I invest in Stallion's developments?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Accredited investors can participate in select projects through private debt secured by a registered second mortgage. Visit Invest With Us to book a confidential consultation."
+          "text": "Stallion partners with a small group of accredited investors on select projects, through loans secured by a registered mortgage. Visit Investors to start a confidential conversation."
         }
       }
     ]
@@ -80,7 +82,7 @@ const schema = [
         <span class="eyebrow">Communities</span>
         <h1>New home communities across Ontario</h1>
         <p class="lede">Boutique collections in places people fall in love with. Filter by region or register for first access to every release.</p>
-        <div class="hero-ctas"><a class="btn btn-solid" href="../contact/?reason=Buying%20a%20home">Register for first access</a></div>
+        <div class="hero-ctas"><a class="btn btn-solid" href="../register/">Register for first access</a></div>
       </div>
     </div>
   </section>
@@ -90,49 +92,12 @@ const schema = [
       <div class="filters" role="group" aria-label="Filter communities">
         <button class="filter active" data-filter="all">All</button>
         <button class="filter" data-filter="muskoka">Muskoka</button>
-        <button class="filter" data-filter="waterloo">Waterloo Region</button>
+        <button class="filter" data-filter="kitchener">Kitchener</button>
         <button class="filter" data-filter="pec">Prince Edward County</button>
         <button class="filter" data-filter="selling">Now Selling</button>
         <button class="filter" data-filter="soon">Coming Soon</button>
       </div>
-      <div class="card-grid cols-2">
-      <a class="community-card reveal" href="../communities/maple-place-bracebridge/" data-tags="muskoka selling">
-        <div class="card-media"><img src="../assets/img/maple-exterior.webp" alt="Maple Place semi-detached home exterior, Bracebridge Muskoka" loading="lazy" /><span class="status-label"><span class="dot"></span>Now selling</span></div>
-        <div class="card-body">
-          <h3>Maple Place</h3>
-          <p class="card-desc">Walk-to-downtown living in the Heart of Muskoka</p>
-          <p class="card-meta">Semi-detached homes · Bracebridge</p>
-          <span class="link-arrow">Register</span>
-        </div>
-      </a>
-      <a class="community-card reveal" href="../communities/anglo-street-bracebridge/" data-tags="muskoka soon">
-        <div class="card-media placeholder"><span class="ph-mark">AS</span><span class="status-label soon"><span class="dot"></span>Coming soon</span></div>
-        <div class="card-body">
-          <h3>Anglo Street</h3>
-          <p class="card-desc">The next chapter of Bracebridge</p>
-          <p class="card-meta">Semi-detached homes · Bracebridge · 1 acre</p>
-          <span class="link-arrow">Register interest</span>
-        </div>
-      </a>
-      <a class="community-card reveal" href="../communities/chicopee-heights-kitchener/" data-tags="waterloo soon">
-        <div class="card-media placeholder"><span class="ph-mark">CH</span><span class="status-label soon"><span class="dot"></span>Coming soon</span></div>
-        <div class="card-body">
-          <h3>Chicopee Heights</h3>
-          <p class="card-desc">Detached family homes in Waterloo Region</p>
-          <p class="card-meta">Detached homes · Kitchener · 3 acres</p>
-          <span class="link-arrow">Register interest</span>
-        </div>
-      </a>
-      <a class="community-card reveal" href="../communities/lady-of-the-woods-prince-edward-county/" data-tags="pec soon">
-        <div class="card-media placeholder"><span class="ph-mark">LW</span><span class="status-label soon"><span class="dot"></span>Coming soon</span></div>
-        <div class="card-body">
-          <h3>Lady of the Woods Estate Homes</h3>
-          <p class="card-desc">Estate living on 24 acres in Prince Edward County</p>
-          <p class="card-meta">Estate homes · Prince Edward County</p>
-          <span class="link-arrow">Register interest</span>
-        </div>
-      </a>
-    </div>
+      <CommunityCards cols={2} />
     </div>
   </section>
 
@@ -146,7 +111,7 @@ const schema = [
       <div class="why-grid">
         <div class="why-card reveal"><span class="eyebrow">Why Muskoka</span><h3>The Heart of Muskoka</h3><p>Bracebridge, known as the Heart of Muskoka, is the seat of the District government. It has 17,305 permanent residents and a growing year-round community. It's also about 2 hours 15 minutes north of Toronto.</p></div>
         <div class="why-card reveal"><span class="eyebrow">Why Prince Edward County</span><h3>Wine and beach country</h3><p>It's Ontario's wine and beach country, where limited supply meets growing demand for estate-scale living.</p></div>
-        <div class="why-card reveal"><span class="eyebrow">Why Waterloo Region</span><h3>A tech and education hub</h3><p>It's one of Canada's leading tech and education hubs, with steady demand for well-built detached family homes.</p></div>
+        <div class="why-card reveal"><span class="eyebrow">Why Kitchener</span><h3>A tech and education hub</h3><p>It's one of Canada's leading tech and education hubs, with steady demand for well-built detached family homes.</p></div>
       </div>
     </div>
   </section>
@@ -160,11 +125,11 @@ const schema = [
           <h2>Construction updates</h2>
           <p>Follow progress, milestones and timelines across our communities.</p>
         </div>
-        <a class="btn btn-ghost reveal" href="../contact/?reason=Buying%20a%20home">Get updates by email</a>
+        <a class="btn btn-ghost reveal" href="../register/">Get updates by email</a>
       </div>
       <div class="card-grid cols-3">
-        <article class="update-card reveal"><span class="meta">Maple Place · July 2025</span><h3>Construction underway on Maple Street</h3><p>Site work began on the semi-detached homes at 243–249 Maple Street with permits approved and land owned outright.</p><a class="link-arrow" href="../communities/maple-place-bracebridge/#timeline">Read update</a></article>
-        <article class="update-card reveal"><span class="meta">Maple Place · Pre-construction</span><h3>Pre-construction sales now open</h3><p>Floor plans and pricing for the four homes are being released to registrants. Register for the full package and first access.</p><a class="link-arrow" href="../communities/maple-place-bracebridge/#register">Register</a></article>
+        <article class="update-card reveal"><span class="meta">Maple Place · July 2025</span><h3>Construction underway on Maple Street</h3><p>Site work began on the semi-detached homes at 243–249 Maple Street with permits approved and land owned outright.</p><a class="link-arrow" href="../communities/maple-place/#timeline">Read update</a></article>
+        <article class="update-card reveal"><span class="meta">Maple Place · Pre-construction</span><h3>Pre-construction sales now open</h3><p>Floor plans and pricing for the four homes are being released to registrants. Register for the full package and first access.</p><a class="link-arrow" href="../communities/maple-place/#register">Register</a></article>
         <article class="update-card reveal"><span class="meta">Pipeline · 2021–2023</span><h3>Land secured across three regions</h3><p>Sites in Bracebridge, Kitchener and Prince Edward County acquired and owned, forming the $50M Ontario pipeline.</p><a class="link-arrow" href="../communities/">See the communities</a></article>
       </div>
     </div>
@@ -176,46 +141,31 @@ const schema = [
       <div class="faq reveal">
       <details>
         <summary>Where does Stallion Developments build?</summary>
-        <div class="answer"><p>Stallion Developments builds premium new homes in Ontario. Current communities are in Bracebridge (Muskoka), Kitchener (Waterloo Region) and Prince Edward County.</p></div>
+        <div class="answer"><p>Stallion Developments builds premium new homes in Ontario. Current communities are in Bracebridge (Muskoka), Kitchener and Prince Edward County.</p></div>
       </details>
       <details>
         <summary>Is Stallion Developments a Tarion-registered builder?</summary>
-        <div class="answer"><p>Yes. Stallion's CEO has been a Tarion-registered builder for more than 10 years, and new homes are covered by the Tarion new home warranty program.</p></div>
+        <div class="answer"><p>Yes. Every Stallion home is enrolled with Tarion and comes with Ontario's statutory new home warranty.</p></div>
       </details>
       <details>
         <summary>Are there new homes for sale in Bracebridge right now?</summary>
-        <div class="answer"><p>Yes. Maple Place is a boutique collection of semi-detached homes on Maple Street in Bracebridge. Each has 1,900 sq ft above ground, 3 bedrooms and 2.5 bathrooms. <a href="../communities/maple-place-bracebridge/#register">Register</a> to receive floor plans and pricing.</p></div>
+        <div class="answer"><p>Yes. Maple Place is a boutique collection of semi-detached homes on Maple Street in Bracebridge. Each has about 1,900 sq ft above ground, 3 bedrooms, 2.5 bathrooms and a finished lower level with its own entrance. <a href="../communities/maple-place/#register">Register</a> to receive floor plans and pricing.</p></div>
       </details>
       <details>
         <summary>Can I invest in Stallion's developments?</summary>
-        <div class="answer"><p>Accredited investors can participate in select projects through private debt secured by a registered second mortgage. Visit <a href="../invest/">Invest With Us</a> to book a confidential consultation.</p></div>
+        <div class="answer"><p>Stallion partners with a small group of accredited investors on select projects, through loans secured by a registered mortgage. Visit <a href="../investors/">Investors</a> to start a confidential conversation.</p></div>
       </details>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap">
-      <div class="band-cta reveal">
-        <div>
-          <span class="eyebrow">For investors</span>
-          <h2>Build wealth alongside the builders.</h2>
-          <p>We offer qualified investors access to Ontario residential development through second-mortgage secured private debt, at conservative loan-to-value ratios and with partner capital invested ahead of yours.</p>
-          <div class="chips"><span class="chip">Second-mortgage security</span><span class="chip">40% LTV</span><span class="chip">Partner capital first-in</span><span class="chip">Monthly reporting</span></div>
-        </div>
-        <aside>
-          <a class="btn btn-light btn-lg" href="../invest/">Explore investment opportunities</a>
-          <p class="micro">For accredited investors only. All investments carry risk. Returns are not guaranteed.</p>
-        </aside>
-      </div>
-    </div>
-  </section>
+  <InvestorBand />
 
   <section class="section pine final-cta">
     <div class="wrap reveal">
-      <h2>Find your place in Muskoka and beyond.</h2>
+      <h2>Find your place in Muskoka.</h2>
       <p>Register for floor plans, pricing and first access to new releases.</p>
-      <div class="hero-ctas"><a class="btn btn-light btn-lg" href="../contact/?reason=Buying%20a%20home">Register now</a></div>
+      <div class="hero-ctas"><a class="btn btn-light btn-lg" href="../register/">Register now</a></div>
     </div>
   </section>
 </main>

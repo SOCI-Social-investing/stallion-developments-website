@@ -1,0 +1,97 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CommunityCards from "../../components/CommunityCards.astro";
+import { communities } from "../../data/communities";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.stalliondevelopments.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Register", "item": "https://www.stalliondevelopments.com/register/" },
+    ],
+  },
+];
+---
+<Layout
+  title="Register for New Homes in Bracebridge & Ontario | Stallion"
+  description="Register for floor plans, pricing and release dates for new homes by Stallion Developments in Bracebridge, Kitchener and Prince Edward County."
+  path="register/"
+  current="contact"
+  schema={schema}
+>
+
+<main class="page">
+  <section class="page-hero has-loop">
+    <div class="hero-loop" aria-hidden="true">
+      <img src="../assets/loops/contact.webp" alt="" loading="eager" />
+      <video autoplay muted loop playsinline preload="metadata" poster="../assets/loops/contact.webp"><source src="../assets/loops/contact.mp4" type="video/mp4" /></video>
+    </div>
+    <div class="wrap">
+      <div>
+        <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a><span>/</span>Register</nav>
+        <span class="eyebrow">Register</span>
+        <h1>Get floor plans and pricing first.</h1>
+        <p class="lede">Tell us what you're looking for and we'll send floor plans, pricing and release dates for the communities you pick. We'll only email when there's news.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section paper" id="form">
+    <div class="wrap form-layout">
+      <div class="sticky reveal">
+        <span class="eyebrow">Contact</span>
+        <h2 class="h2" style="margin-top:0.8rem">Stallion Developments</h2>
+        <dl class="contact-details" style="margin-top:2rem">
+          <div><dt>Sales centre</dt><dd>By appointment: 243 Maple Street, Bracebridge, ON</dd></div>
+          <div><dt>Email</dt><dd><a href="mailto:info@stalliondevelopments.com">info@stalliondevelopments.com</a></dd></div>
+          <!-- CONFIRM: sales phone number (use the same name, address and phone here, in the footer and on Google Business Profile) -->
+        </dl>
+      </div>
+      <div>
+        <form class="form reveal" method="post" data-endpoint="" data-form="register" data-form-type="register">
+          <div class="row"><div class="field"><label for="name">Name*</label><input id="name" name="name" type="text" required autocomplete="name" placeholder="" /></div><div class="field"><label for="email">Email*</label><input id="email" name="email" type="email" required autocomplete="email" placeholder="" /></div></div>
+          <div class="row"><div class="field"><label for="phone">Phone (optional)</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="" /></div><div class="field"><label for="timeline">Timeline</label><select id="timeline" name="timeline"><option value="" disabled selected>Select…</option><option value="0–3 months">0–3 months</option><option value="3–12 months">3–12 months</option><option value="Just looking">Just looking</option></select></div></div>
+          <fieldset class="field checks">
+            <legend>Communities of interest</legend>
+            {communities.map((c) => (
+              <label class="check"><input type="checkbox" name="communities" value={c.name} /> <span>{c.name}, {c.town.replace(", Muskoka", "")}</span></label>
+            ))}
+          </fieldset>
+          <label class="check"><input type="checkbox" name="realtor" value="yes" /> <span>I'm a realtor</span></label>
+          <label class="check"><input type="checkbox" name="consent" value="yes" required /> <span>Yes, I'd like to receive updates, floor plans and offers from Stallion Developments by email and phone. I can unsubscribe at any time.</span></label>
+          <button class="btn btn-solid btn-lg" type="submit">Get floor plans &amp; pricing</button>
+          <p class="micro recaptcha-note">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
+        </form>
+        <div class="form-success"><h3>Thanks, <span data-first-name>there</span>. You're on the list.</h3><p>We'll send Maple Place floor plans and pricing within 1 business day. Questions in the meantime? Email <a href="mailto:info@stalliondevelopments.com">info@stalliondevelopments.com</a>.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">Communities</span><h2>Looking for a specific community?</h2></div>
+      <CommunityCards />
+    </div>
+  </section>
+</main>
+</Layout>
+
+<script>
+  // ?community=Maple%20Place (from "Book a site visit" and similar links) pre-ticks that community,
+  // and the confirmation greets the visitor by first name.
+  const want = new URLSearchParams(location.search).get("community");
+  if (want) {
+    document.querySelectorAll<HTMLInputElement>('input[name="communities"]').forEach((box) => {
+      if (box.value === want) box.checked = true;
+    });
+  }
+  const form = document.querySelector<HTMLFormElement>('form[data-form="register"]');
+  const nameField = document.querySelector<HTMLInputElement>("#name");
+  const greet = document.querySelector("[data-first-name]");
+  form?.addEventListener("submit", () => {
+    const first = nameField?.value.trim().split(/\s+/)[0];
+    if (first && greet) greet.textContent = first;
+  });
+</script>

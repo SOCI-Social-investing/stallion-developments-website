@@ -1,119 +1,106 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ScrollFilm from "../components/motion/ScrollFilm.astro";
+import CommunityCards from "../components/CommunityCards.astro";
 import * as film from "../data/home-film";
+
+/* Homepage FAQ: the visible questions below and this markup must match word for word */
+const faq = [
+  ["Is Stallion Developments a Tarion-registered builder?", "Yes. Every Stallion home is enrolled with Tarion and comes with Ontario's statutory new home warranty."],
+  ["Where is Stallion building?", "Bracebridge in Muskoka, Kitchener in Waterloo Region, and Prince Edward County."],
+  ["What's available now?", "Maple Place in Bracebridge: four semi-detached homes with finished lower levels and separate entrances."],
+  ["How do I get pricing?", "Register on this page and we'll send floor plans, pricing and release dates."],
+];
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Stallion Developments",
+    "url": "https://www.stalliondevelopments.com/",
+    "publisher": { "@id": "https://www.stalliondevelopments.com/#org" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faq.map(([q, a]) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } })),
+  },
+];
 ---
 <Layout
-  title="Stallion Developments | New Homes in Muskoka & Ontario"
-  description="Premium new homes in Bracebridge, Muskoka, Prince Edward County and Kitchener by a Tarion-registered Ontario builder. Explore communities or invest with us."
+  title="New Homes in Bracebridge, Muskoka & Ontario | Stallion Developments"
+  description="New semi-detached homes now selling in Bracebridge, Muskoka, plus upcoming communities in Kitchener and Prince Edward County. Engineer-led, Tarion-registered builder."
   path=""
   variant="film"
+  schema={schema}
 >
-  <!-- The home, deconstructing as you scroll. Segment ids in data-seg come from src/data/home-film.ts -->
+  <!-- The hero: five frames told over the scroll film. Segment ids in data-seg come from src/data/home-film.ts.
+       All five frames' text is in the page on load; the film only changes when each one shows.
+       Each .band-still is shown only under reduced motion, when the frames stack as plain sections. -->
   <ScrollFilm
     sources={film.sources}
     timeline={film.timeline}
     preload={film.preload}
-    overlay={film.overlay}
-    marquee={film.marquee}
     length={film.length}
     loader="Stallion"
   >
+    <!-- Frame 1 · Exterior (the page's only H1) -->
     <section class="band-section hero-section is-active" id="top" data-seg="hero:0,hero:1" data-animation="hero">
       <div class="hero-inner">
-        <span class="eyebrow">Ontario home builder &amp; developer</span>
+        <span class="eyebrow">Ontario home builder</span>
         <h1 class="hero-heading">
-          <span class="line"><span class="word">Crafted</span> <span class="word">homes</span> <span class="word">in</span></span>
-          <span class="line"><span class="word">Ontario's</span> <span class="word">most</span></span>
-          <span class="line"><span class="word">sought-after</span> <span class="word">places.</span></span>
+          <span class="line"><span class="word">New</span> <span class="word">homes</span> <span class="word">in</span></span>
+          <span class="line"><span class="word">Muskoka,</span> <span class="word">built</span> <span class="word">by</span></span>
+          <span class="line"><span class="word">the</span> <span class="word">people</span> <span class="word">who</span></span>
+          <span class="line"><span class="word">design</span> <span class="word">them.</span></span>
         </h1>
-        <p class="hero-tagline">From the Heart of Muskoka to Prince Edward County and Waterloo Region, Stallion Developments designs, builds and sells premium new homes, and invites qualified investors to build alongside us.</p>
+        <p class="hero-tagline">Engineer-led, Tarion-registered homes in Bracebridge, Kitchener and Prince Edward County.</p>
         <div class="hero-ctas">
-          <a class="btn btn-solid" href="./communities/">Explore communities</a>
-          <a class="btn btn-ghost" href="./invest/">Invest with us</a>
+          <a class="btn btn-solid" href="./communities/maple-place/">See Maple Place</a>
+          <a class="btn btn-ghost" href="./register/">Register for pricing</a>
         </div>
-        <div class="badge-strip"><span>Tarion-registered builder</span><span>Engineer-led</span><span>In-house construction</span></div>
       </div>
+      <img class="band-still" src="./frames/frame_0001.webp" alt="Maple Place semi-detached homes on Maple Street, Bracebridge, front exterior rendering" loading="lazy" />
     </section>
 
-    <section class="band-section" data-seg="clip1:0.15,clip1:0.95" data-animation="slide-left">
+    <!-- Frame 2 · The builder (roof lifts, the floors strip back to the framing) -->
+    <section class="band-section" data-seg="clip1:0.15,clip2:0.95" data-animation="slide-left">
       <div class="beat-copy">
-        <span class="beat-index">1</span>
-        <h2 class="beat-heading">Builder-led, not broker-led.</h2>
-        <p class="beat-body">Our CEO is a licensed Professional Engineer (20+ years) and a Tarion-registered builder (10+ years). Every home comes with Tarion new home warranty coverage.</p>
+        <span class="beat-index beat-eyebrow">Built by builders</span>
+        <h2 class="beat-heading">The engineer who plans it is on site while it goes up.</h2>
+        <p class="beat-body">No hand-offs. Our own team designs, builds and stands behind every home.</p>
       </div>
+      <img class="band-still" src="./frames/frame_0060.webp" alt="Maple Place home with its roof lifted away to show the timber framing, Bracebridge" loading="lazy" />
     </section>
 
-    <section class="band-section" data-seg="clip2:0.1,clip2:0.95" data-animation="fade-up">
+    <!-- Frame 3 · Natural light (rise into the upper floor, frames/bedroom) -->
+    <section class="band-section" data-seg="brfwd:0.55,clip3:0.8" data-animation="fade-up">
       <div class="beat-copy">
-        <span class="beat-index">2</span>
-        <h2 class="beat-heading">In-house construction.</h2>
-        <p class="beat-body">Our own team builds our homes, with no third-party general contractor markup. Your money goes into the materials and the craftsmanship.</p>
-      </div>
-    </section>
-    <!-- Cutaway: rise into the upper floor (generated, frames/bedroom) -->
-    <section class="band-section interlude" data-seg="brfwd:0.7,brrev:0.4" data-animation="fade-up">
-      <div class="beat-copy">
-        <span class="beat-index beat-eyebrow">Inside</span>
+        <span class="beat-index beat-eyebrow">Designed for light</span>
         <h2 class="beat-heading">Natural light, in every room.</h2>
+        <p class="beat-body">Big windows on every level, down to the finished lower level.</p>
       </div>
+      <img class="band-still" src="./frames/bedroom/br_0061.webp" alt="Bright bedroom with large windows in a Maple Place home" loading="lazy" />
     </section>
 
-    <section class="band-section" data-seg="clip3:0.1,clip3:0.95" data-animation="clip-reveal">
+    <!-- Frame 4 · Open-concept living (front door → living room → kitchen, frames/living + kitchen) -->
+    <section class="band-section" data-seg="lvfwd:0.55,kthold:0.9" data-animation="clip-reveal">
       <div class="beat-copy">
-        <span class="beat-index">3</span>
-        <h2 class="beat-heading">Transparent from day one.</h2>
-        <p class="beat-body">Clear specs, clear timelines and regular construction updates for buyers and investors alike.</p>
+        <span class="beat-index beat-eyebrow">Made for hosting</span>
+        <h2 class="beat-heading">One open floor for cooking, dining and living.</h2>
+        <p class="beat-body">Room for the whole family on a weeknight, and for everyone else on long weekends.</p>
       </div>
-    </section>
-    <!-- Cutaways: front door → living room → kitchen → deck (generated, frames/living, kitchen, deck) -->
-    <section class="band-section interlude" data-seg="lvfwd:0.7,ktfwd:0.35" data-animation="fade-up">
-      <div class="beat-copy">
-        <span class="beat-index beat-eyebrow">Inside</span>
-        <h2 class="beat-heading">Open-concept living.</h2>
-      </div>
+      <img class="band-still" src="./frames/living/lv_0061.webp" alt="Open-concept kitchen, dining and living area in a new Bracebridge home" loading="lazy" />
     </section>
 
-    <section class="band-section interlude" data-seg="ktfwd:0.7,dkfwd:0.35" data-animation="fade-up">
+    <!-- Frame 5 · The yard (out the rear doors to the deck, frames/deck); ends the story on Maple Place -->
+    <section class="band-section" data-seg="dkfwd:0.5,byhold:1" data-animation="rotate-in">
       <div class="beat-copy">
-        <span class="beat-index beat-eyebrow">Inside</span>
-        <h2 class="beat-heading">The open-concept kitchen.</h2>
+        <span class="beat-index beat-eyebrow">Now selling · Maple Place, Bracebridge</span>
+        <h2 class="beat-heading">Deep yards, made for Muskoka summers.</h2>
+        <p class="beat-body">Four semi-detached homes, a short walk from downtown Bracebridge. Only four, so register early.</p>
+        <div class="hero-ctas"><a class="btn btn-solid" href="./communities/maple-place/#register">Get floor plans &amp; pricing</a></div>
       </div>
-    </section>
-
-    <section class="band-section interlude" data-seg="dkfwd:0.7,byrev:0.4" data-animation="fade-up">
-      <div class="beat-copy">
-        <span class="beat-index beat-eyebrow">Out back</span>
-        <h2 class="beat-heading">Generous yards, made for Muskoka summers.</h2>
-      </div>
-    </section>
-
-    <section class="band-section" data-seg="clip4:0.1,clip4:0.95" data-animation="slide-left">
-      <div class="beat-copy">
-        <span class="beat-index">4</span>
-        <h2 class="beat-heading">Built by the team behind it.</h2>
-        <p class="beat-body">We develop, build, and oversee every project from acquisition through construction, giving us control over the details that matter.</p>
-      </div>
-    </section>
-
-    <section class="band-section" data-seg="clip5:0.05,clip5:0.95" data-animation="rotate-in">
-      <div class="beat-copy">
-        <span class="beat-index">5</span>
-        <h2 class="beat-heading">Designed for how Ontario lives now.</h2>
-        <p class="beat-body">Open-concept plans, generous yards and natural light, for full-time living as well as weekends.</p>
-      </div>
-    </section>
-
-    <section class="band-section stats-section" data-seg="clip6:0.12,end:1" data-animation="stagger-up">
-      <div class="stats-hero">
-        <span class="stats-figure">$<span class="stat-number" data-value="50" data-decimals="0">0</span>M+</span>
-        <span class="stats-caption">development pipeline across Ontario</span><!-- CONFIRM: $50M figure, see copy doc 9.1 -->
-      </div>
-      <div class="stats-grid">
-        <div class="stat"><span class="stat-number" data-value="4" data-decimals="0">0</span><span class="stat-suffix"></span><span class="stat-label">active communities</span></div>
-        <div class="stat"><span class="stat-number" data-value="30" data-decimals="0">0</span><span class="stat-suffix">+</span><span class="stat-label">acres secured and owned</span></div>
-        <div class="stat"><span class="stat-number" data-value="75" data-decimals="0">0</span><span class="stat-suffix">+</span><span class="stat-label">years of combined leadership experience</span></div>
-      </div>
+      <img class="band-still" src="./frames/deck/dk_0061.webp" alt="Deep private backyard with deck at Maple Place, Muskoka" loading="lazy" />
     </section>
   </ScrollFilm>
 
@@ -121,38 +108,45 @@ import * as film from "../data/home-film";
 <main class="page-flow">
   <span class="flow-anchor" id="flow"></span>
 
-  <!-- Brand statement -->
-  <section class="section" id="about">
-    <div class="wrap statement">
-      <h2 class="reveal">A developer built by builders.</h2>
-      <div class="reveal">
-        <p>Most developers hire out the hard part. We don't. Stallion Developments is led by a licensed Professional Engineer and Tarion-registered builder, backed by a construction, design and sales team that has delivered $150M+ in projects in Canada and abroad. We control every stage in-house, from land and approvals to construction and sales. That means fewer hand-offs, tighter quality and homes built the way we'd build them for our own families.</p>
-        <p class="accent">Every detail is decided by the people accountable for it.</p>
-      </div>
+  <!-- Quick answer: plain text for search and AI tools to quote. Keep it right after frame 5. -->
+  <section class="section quick-answer">
+    <div class="wrap-narrow">
+      <p class="lede reveal">Stallion Developments is an Ontario home builder and developer led by a licensed Professional Engineer and Tarion-registered builder. It is building new homes in Bracebridge (Muskoka), Kitchener and Prince Edward County. <a href="./communities/maple-place/">Maple Place in Bracebridge</a> is selling now, with occupancy targeted for summer 2027.</p><!-- CONFIRM: Maple Place occupancy target -->
+    </div>
+  </section>
+
+  <!-- Stats: the real numbers are in the page; the count-up runs to them -->
+  <section class="section tight proof-bar">
+    <div class="wrap proof-grid">
+      <div class="proof-item reveal"><span class="proof-figure"><span class="stat-number" data-value="4" data-decimals="0">4</span></span><span class="proof-label">communities across Ontario</span></div>
+      <div class="proof-item reveal"><span class="proof-figure"><span class="stat-number" data-value="25" data-decimals="0">25</span>+</span><span class="proof-label">acres owned outright</span></div><!-- CONFIRM: acres owned -->
+      <div class="proof-item reveal"><span class="proof-figure">~$<span class="stat-number" data-value="50" data-decimals="0">50</span>M</span><span class="proof-label">development pipeline</span></div>
+      <div class="proof-item reveal"><span class="proof-figure"><span class="stat-number" data-value="75" data-decimals="0">75</span>+</span><span class="proof-label">years of combined building experience</span></div><!-- CONFIRM: combined years -->
     </div>
   </section>
 
   <!-- Featured community -->
-  <section class="section no-top" id="featured">
+  <section class="section" id="featured">
     <div class="wrap">
       <article class="featured reveal">
         <div class="featured-media">
-          <img src="./assets/img/maple-aerial.webp" alt="Aerial rendering of Maple Place semi-detached homes, Bracebridge Muskoka" loading="lazy" />
+          <img src="./assets/img/maple-aerial.webp" alt="Aerial rendering of Maple Place semi-detached homes on Maple Street, Bracebridge" loading="lazy" />
         </div>
         <div class="featured-body">
-          <span class="status-label"><span class="dot"></span>Now selling · Bracebridge, Muskoka</span><!-- CONFIRM status -->
-          <h2>Maple Place. Walk-to-downtown living in the Heart of Muskoka.</h2>
-          <p class="featured-lede">Premium semi-detached homes on quiet Maple Street, Bracebridge. Minutes from the lake, the falls and Muskoka's Downtown.</p>
+          <span class="status-label"><span class="dot"></span>Now selling · Bracebridge, Muskoka</span>
+          <h2>Maple Place: walk-to-downtown living in the heart of Muskoka.</h2>
+          <p class="featured-lede">Four semi-detached homes on quiet Maple Street. 3 bedrooms, 2.5 baths and about 1,900 sq ft above ground, plus a finished lower level with its own entrance. Minutes from the falls, the river and downtown Bracebridge.</p>
           <dl class="spec-list">
             <div><dt>Bedrooms</dt><dd>3</dd></div>
             <div><dt>Bathrooms</dt><dd>2.5</dd></div>
             <div><dt>Size</dt><dd>1,900 sq ft above ground</dd></div>
+            <div><dt>Lower level</dt><dd>Finished, with separate entrance</dd></div>
             <div><dt>Lot</dt><dd>33' x 108' with deep private yard</dd></div>
             <div><dt>Layout</dt><dd>Open-concept, 2 storeys</dd></div>
           </dl>
           <div class="hero-ctas">
-            <a class="btn btn-solid" href="./communities/maple-place-bracebridge/#register">Get floor plans &amp; pricing</a>
-            <a class="btn btn-ghost" href="./communities/maple-place-bracebridge/">Explore Maple Place</a>
+            <a class="btn btn-solid" href="./communities/maple-place/#register">Get floor plans &amp; pricing</a>
+            <a class="btn btn-ghost" href="./communities/maple-place/">Explore Maple Place</a>
           </div>
         </div>
       </article>
@@ -170,59 +164,54 @@ import * as film from "../data/home-film";
         </div>
         <a class="btn btn-ghost reveal" href="./communities/">All communities</a>
       </div>
-      <div class="card-grid cols-4">
-      <a class="community-card reveal" href="./communities/maple-place-bracebridge/" data-tags="muskoka selling">
-        <div class="card-media"><img src="./assets/img/maple-exterior.webp" alt="Maple Place semi-detached home exterior, Bracebridge Muskoka" loading="lazy" /><span class="status-label"><span class="dot"></span>Now selling</span></div>
-        <div class="card-body">
-          <h3>Maple Place</h3>
-          <p class="card-desc">Walk-to-downtown living in the Heart of Muskoka</p>
-          <p class="card-meta">Semi-detached homes · Bracebridge</p>
-          <span class="link-arrow">Register</span>
-        </div>
-      </a>
-      <a class="community-card reveal" href="./communities/anglo-street-bracebridge/" data-tags="muskoka soon">
-        <div class="card-media placeholder"><span class="ph-mark">AS</span><span class="status-label soon"><span class="dot"></span>Coming soon</span></div>
-        <div class="card-body">
-          <h3>Anglo Street</h3>
-          <p class="card-desc">The next chapter of Bracebridge</p>
-          <p class="card-meta">Semi-detached homes · Bracebridge · 1 acre</p>
-          <span class="link-arrow">Register interest</span>
-        </div>
-      </a>
-      <a class="community-card reveal" href="./communities/chicopee-heights-kitchener/" data-tags="waterloo soon">
-        <div class="card-media placeholder"><span class="ph-mark">CH</span><span class="status-label soon"><span class="dot"></span>Coming soon</span></div>
-        <div class="card-body">
-          <h3>Chicopee Heights</h3>
-          <p class="card-desc">Detached family homes in Waterloo Region</p>
-          <p class="card-meta">Detached homes · Kitchener · 3 acres</p>
-          <span class="link-arrow">Register interest</span>
-        </div>
-      </a>
-      <a class="community-card reveal" href="./communities/lady-of-the-woods-prince-edward-county/" data-tags="pec soon">
-        <div class="card-media placeholder"><span class="ph-mark">LW</span><span class="status-label soon"><span class="dot"></span>Coming soon</span></div>
-        <div class="card-body">
-          <h3>Lady of the Woods Estate Homes</h3>
-          <p class="card-desc">Estate living on 24 acres in Prince Edward County</p>
-          <p class="card-meta">Estate homes · Prince Edward County</p>
-          <span class="link-arrow">Register interest</span>
-        </div>
-      </a>
-    </div>
+      <CommunityCards />
+      <!-- CONFIRM: delivery dates (Anglo Street, Chicopee Heights Q4 2028; Lady of the Woods 2029) and Lady of the Woods home count -->
     </div>
   </section>
 
-  
+  <!-- Why Stallion (the nav's "Why Stallion" links here until it has its own page) -->
+  <section class="section" id="why-stallion">
+    <div class="wrap statement">
+      <div class="reveal">
+        <span class="eyebrow">Why Stallion</span>
+        <h2 style="margin-top:0.8rem">A developer built by builders.</h2>
+      </div>
+      <div class="reveal">
+        <p>Most developers hire out the hard part. We don't. Stallion Developments is led by a licensed Professional Engineer and Tarion-registered builder, backed by a construction, design and sales team that has delivered $150M+ in projects in Canada and abroad. We control every stage in-house, from land and approvals to construction and sales. That means fewer hand-offs, tighter quality and homes built the way we'd build them for our own families.</p>
+        <p class="accent">Every detail is decided by the people accountable for it.</p>
+      </div>
+    </div>
+  </section>
 
-  
+  <!-- Investor band: short and low on the page -->
+  <section class="section tight investor-band">
+    <div class="wrap reveal">
+      <p><strong>For investors.</strong> We work with a small group of accredited investors on select projects. <a class="link-arrow" href="./investors/">Learn how we partner</a></p>
+    </div>
+  </section>
 
-  <!-- Final CTA -->
+  <!-- Closing CTA -->
   <section class="section pine final-cta" id="register">
     <div class="wrap reveal">
-      <h2>Find your place in Muskoka and beyond.</h2>
-      <p>Register for floor plans, pricing and first access to new releases.</p>
+      <h2>Find your place in Muskoka.</h2>
+      <p>Register for floor plans, pricing and first access to new releases. We'll only email when there's something worth knowing.</p>
       <div class="hero-ctas">
-        <a class="btn btn-light btn-lg" href="./contact/?reason=Buying%20a%20home">Register now</a>
-        <a class="btn btn-ghost btn-lg" href="./invest/">Invest with us</a>
+        <a class="btn btn-light btn-lg" href="./register/">Register now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Homepage FAQ (FAQPage markup above, same words) -->
+  <section class="section" id="faq">
+    <div class="wrap-narrow">
+      <div class="section-head reveal"><h2>Frequently asked questions</h2></div>
+      <div class="faq reveal">
+        {faq.map(([q, a]) => (
+          <details>
+            <summary>{q}</summary>
+            <div class="answer"><p>{a}</p></div>
+          </details>
+        ))}
       </div>
     </div>
   </section>

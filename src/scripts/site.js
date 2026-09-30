@@ -27,7 +27,9 @@
     reveals.forEach((el) => el.classList.add("in"));
   }
 
-  /* Count-up numbers outside the film band */
+  /* Count-up numbers outside the film band. The real number is in the HTML (so search
+     engines and no-JS visitors read it); the count-up from 0 only starts as the number
+     scrolls into view, so it never sits at 0. */
   const counters = document.querySelectorAll(".page .stat-number:not([data-static]), .page-flow .stat-number:not([data-static])");
   const animateCount = (el) => {
     const target = parseFloat(el.dataset.value);
@@ -44,7 +46,7 @@
   if (counters.length && "IntersectionObserver" in window) {
     const cio = new IntersectionObserver((entries) => {
       entries.forEach((e) => { if (e.isIntersecting) { animateCount(e.target); cio.unobserve(e.target); } });
-    }, { rootMargin: "0px 0px -8% 0px" });
+    }, { rootMargin: "0px" });
     counters.forEach((el) => cio.observe(el));
   }
 

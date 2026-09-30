@@ -1,0 +1,38 @@
+---
+/* Card grid of communities from src/data/communities.ts.
+   <CommunityCards />                       all four, 4 columns
+   <CommunityCards exclude="anglo-street" /> the other three, for a community page */
+import { communities } from "../data/communities";
+import { url } from "../lib/url";
+
+interface Props {
+  exclude?: string;
+  cols?: 2 | 3 | 4;
+}
+const { exclude, cols } = Astro.props;
+const list = communities.filter((c) => c.slug !== exclude);
+const columns = cols ?? (list.length === 3 ? 3 : 4);
+---
+<div class={`card-grid cols-${columns}`}>
+  {list.map((c) => (
+    <a class="community-card reveal" href={url(`communities/${c.slug}/`)} data-tags={c.tags}>
+      {c.image ? (
+        <div class="card-media">
+          <img src={url(c.image)} alt={c.alt} loading="lazy" />
+          <span class="status-label"><span class="dot"></span>{c.status}</span>
+        </div>
+      ) : (
+        <div class="card-media placeholder">
+          <span class="ph-mark">{c.mark}</span>
+          <span class="status-label soon"><span class="dot"></span>{c.status}</span>
+        </div>
+      )}
+      <div class="card-body">
+        <h3>{c.name}</h3>
+        <p class="card-desc">{c.line}</p>
+        <p class="card-meta">{c.town}</p>
+        <span class="link-arrow">{c.cta}</span>
+      </div>
+    </a>
+  ))}
+</div>

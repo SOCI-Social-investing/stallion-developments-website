@@ -3,17 +3,20 @@ import { url } from "../lib/url";
 
 interface Props {
   /** Nav item marked aria-current="page" */
-  current?: "communities" | "invest" | "team" | "contact";
+  current?: "communities" | "why" | "team" | "investors" | "contact";
 }
 const { current } = Astro.props;
 
+// Buyers first; investors get a quieter link (client copy doc, 2026-09-29).
+// "Why Stallion" points at the homepage section until it has its own page.
 const NAV = [
   { key: "communities", href: "communities/", label: "Communities" },
-  { key: "invest", href: "invest/", label: "Invest With Us" },
+  { key: "why", href: "#why-stallion", label: "Why Stallion" },
   { key: "team", href: "team/", label: "Our Team" },
-  { key: "contact", href: "contact/", label: "Contact" },
+  { key: "investors", href: "investors/", label: "Investors" },
+  { key: "contact", href: "register/", label: "Contact" },
 ];
-const register = url("contact/?reason=Buying%20a%20home");
+const register = url("register/");
 ---
 <header class="site-header">
   <a class="brand" href={url()}>Stallion<em>Developments</em></a>

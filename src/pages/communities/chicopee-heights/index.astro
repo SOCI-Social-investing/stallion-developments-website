@@ -1,7 +1,17 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
+import CommunityCards from "../../../components/CommunityCards.astro";
+import InvestorBand from "../../../components/InvestorBand.astro";
 
 const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Residence",
+    "name": "Chicopee Heights",
+    "url": "https://www.stalliondevelopments.com/communities/chicopee-heights/",
+    "description": "6+ detached family homes on a 3-acre site in Kitchener's Chicopee neighbourhood.",
+    "address": { "@type": "PostalAddress", "addressLocality": "Kitchener", "addressRegion": "ON", "addressCountry": "CA" },
+  },
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -22,16 +32,16 @@ const schema = [
         "@type": "ListItem",
         "position": 3,
         "name": "Chicopee Heights",
-        "item": "https://www.stalliondevelopments.com/communities/chicopee-heights-kitchener/"
+        "item": "https://www.stalliondevelopments.com/communities/chicopee-heights/"
       }
     ]
   }
 ];
 ---
 <Layout
-  title="Chicopee Heights | New Detached Homes in Kitchener"
-  description="Chicopee Heights by Stallion Developments: new detached homes on 3 acres in Kitchener, Waterloo Region. Register for floor plans, pricing and first access."
-  path="communities/chicopee-heights-kitchener/"
+  title="New Detached Homes in Kitchener | Chicopee Heights"
+  description="Chicopee Heights: new detached homes on a 3-acre site in Kitchener's Chicopee area. Engineer-led, Tarion-registered builder. Register for first access."
+  path="communities/chicopee-heights/"
   current="communities"
   schema={schema}
 >
@@ -41,12 +51,11 @@ const schema = [
     <div class="wrap">
       <div>
         <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../../">Home</a><span>/</span><a href="../../communities/">Communities</a><span>/</span>Chicopee Heights</nav>
-        <span class="status-label soon"><span class="dot"></span>Coming soon · Kitchener, Waterloo Region</span>
-        <h1>Chicopee Heights: new detached homes in Kitchener</h1>
-        <p class="lede" style="font-family:var(--font-display);font-style:italic;color:var(--moss);font-size:clamp(1.4rem,2vw,1.8rem)">Detached family homes in Waterloo Region.</p>
-        <p class="lede">Chicopee Heights is a three-acre community of new detached homes in Kitchener, planned for growing families who want space, quality and easy access to everything Waterloo Region offers. That includes its tech and university corridor, trails and green space, and fast routes to Highway 401. Register to be first in line for floor plans and release pricing.</p>
-        <div class="chips"><span class="chip">Detached homes</span><span class="chip">3 acres</span><span class="chip">Kitchener, Waterloo Region</span></div><!-- CONFIRM: # of homes, sizes, launch date -->
-        <div class="hero-ctas"><a class="btn btn-solid" href="#register">Register for first access</a></div>
+        <span class="status-label soon"><span class="dot"></span>Delivering Q4 2028 · Kitchener</span>
+        <h1>New detached homes coming to Chicopee, Kitchener.</h1>
+        <p class="lede">Chicopee Heights is a community of 6+ detached family homes on a 3-acre site in Kitchener's Chicopee neighbourhood, close to Chicopee Ski &amp; Summer Resort. The 165-acre resort is a year-round playground, with skiing, snowboarding and a tube park in winter, and mountain biking, disc golf and ropes courses in summer. Release is expected in Q4 2028.</p>
+        <div class="chips"><span class="chip">Detached homes</span><span class="chip">3-acre site</span><span class="chip">Kitchener</span></div><!-- CONFIRM: home count and release timing -->
+        <div class="hero-ctas"><a class="btn btn-solid" href="#register">Register interest</a></div>
       </div>
       <div class="hero-media reveal"><div class="card-media placeholder" style="aspect-ratio:1;border-radius:18px"><span class="ph-mark">CH</span></div></div>
     </div>
@@ -54,8 +63,8 @@ const schema = [
 
   <section class="section">
     <div class="wrap">
-      <div class="section-head reveal"><span class="eyebrow">Why Waterloo Region</span><h2>A tech and education hub</h2></div>
-      <div class="statement reveal"><p class="lede" style="grid-column:1/-1;color:var(--ink-soft)">Waterloo Region is one of Canada's leading tech and education hubs, with steady demand for well-built detached family homes.</p></div>
+      <div class="section-head reveal"><span class="eyebrow">Why Kitchener</span><h2>A tech and education hub</h2></div>
+      <div class="statement reveal"><p class="lede" style="grid-column:1/-1;color:var(--ink-soft)">Kitchener, in Waterloo Region, is one of Canada's leading tech and education hubs, with steady demand for well-built detached family homes.</p></div>
     </div>
   </section>
 
@@ -79,11 +88,11 @@ const schema = [
     <div class="wrap form-layout">
       <div class="sticky reveal">
         <span class="eyebrow">Register</span>
-        <h2 class="h2" style="margin-top:0.8rem">Register for first access</h2>
+        <h2 class="h2" style="margin-top:0.8rem">Register interest</h2>
         <p class="ink-soft" style="margin-top:1rem;font-size:1.08rem">Registrants get first access to floor plans, pricing and lot selection before the public release.</p>
       </div>
       <div>
-        <form class="form reveal" method="post" data-endpoint="" data-form="chicopee-heights-kitchener-register" data-form-type="floor_plan">
+        <form class="form reveal" method="post" data-endpoint="" data-form="chicopee-heights-register" data-form-type="floor_plan">
           <input type="hidden" name="community" value="Chicopee Heights" />
           <div class="row"><div class="field"><label for="first_name">First name*</label><input id="first_name" name="first_name" type="text" required placeholder="" /></div><div class="field"><label for="last_name">Last name*</label><input id="last_name" name="last_name" type="text" required placeholder="" /></div></div>
           <div class="row"><div class="field"><label for="email">Email*</label><input id="email" name="email" type="email" required placeholder="" /></div><div class="field"><label for="phone">Phone*</label><input id="phone" name="phone" type="tel" required placeholder="" /></div></div>
@@ -92,7 +101,7 @@ const schema = [
           <label class="check"><input type="checkbox" name="agent" value="yes" /> <span>I am a real estate agent</span></label>
           <div class="field"><label for="questions">Questions</label><textarea id="questions" name="questions" placeholder="Anything you'd like to know?"></textarea></div>
           <label class="check"><input type="checkbox" name="consent" value="yes" required /> <span>Yes, I'd like to receive updates, floor plans and offers from Stallion Developments by email and phone. I can unsubscribe at any time.</span></label>
-          <button class="btn btn-solid btn-lg" type="submit">Register for first access</button>
+          <button class="btn btn-solid btn-lg" type="submit">Register interest</button>
           <p class="micro recaptcha-note">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
         </form>
         <div class="form-success"><h3>You're on the list.</h3><p>We'll send you the release package for Chicopee Heights as soon as it's ready, and a member of our sales team will be in touch within one business day.</p></div>
@@ -100,55 +109,12 @@ const schema = [
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap">
-      <div class="band-cta reveal">
-        <div>
-          <span class="eyebrow">For investors</span>
-          <h2>Build wealth alongside the builders.</h2>
-          <p>We offer qualified investors access to Ontario residential development through second-mortgage secured private debt, at conservative loan-to-value ratios and with partner capital invested ahead of yours.</p>
-          <div class="chips"><span class="chip">Second-mortgage security</span><span class="chip">40% LTV</span><span class="chip">Partner capital first-in</span><span class="chip">Monthly reporting</span></div>
-        </div>
-        <aside>
-          <a class="btn btn-light btn-lg" href="../../invest/">Explore investment opportunities</a>
-          <p class="micro">For accredited investors only. All investments carry risk. Returns are not guaranteed.</p>
-        </aside>
-      </div>
-    </div>
-  </section>
+  <InvestorBand />
 
   <section class="section no-top">
     <div class="wrap">
       <div class="section-head reveal"><span class="eyebrow">Other communities</span><h2>More from Stallion</h2></div>
-      <div class="card-grid cols-3">
-      <a class="community-card reveal" href="../../communities/maple-place-bracebridge/" data-tags="muskoka selling">
-        <div class="card-media"><img src="../../assets/img/maple-exterior.webp" alt="Maple Place semi-detached home exterior, Bracebridge Muskoka" loading="lazy" /><span class="status-label"><span class="dot"></span>Now selling</span></div>
-        <div class="card-body">
-          <h3>Maple Place</h3>
-          <p class="card-desc">Walk-to-downtown living in the Heart of Muskoka</p>
-          <p class="card-meta">Semi-detached homes · Bracebridge</p>
-          <span class="link-arrow">Register</span>
-        </div>
-      </a>
-      <a class="community-card reveal" href="../../communities/anglo-street-bracebridge/" data-tags="muskoka soon">
-        <div class="card-media placeholder"><span class="ph-mark">AS</span><span class="status-label soon"><span class="dot"></span>Coming soon</span></div>
-        <div class="card-body">
-          <h3>Anglo Street</h3>
-          <p class="card-desc">The next chapter of Bracebridge</p>
-          <p class="card-meta">Semi-detached homes · Bracebridge · 1 acre</p>
-          <span class="link-arrow">Register interest</span>
-        </div>
-      </a>
-      <a class="community-card reveal" href="../../communities/lady-of-the-woods-prince-edward-county/" data-tags="pec soon">
-        <div class="card-media placeholder"><span class="ph-mark">LW</span><span class="status-label soon"><span class="dot"></span>Coming soon</span></div>
-        <div class="card-body">
-          <h3>Lady of the Woods Estate Homes</h3>
-          <p class="card-desc">Estate living on 24 acres in Prince Edward County</p>
-          <p class="card-meta">Estate homes · Prince Edward County</p>
-          <span class="link-arrow">Register interest</span>
-        </div>
-      </a>
-    </div>
+      <CommunityCards exclude="chicopee-heights" />
       <p class="disclaimer" style="margin-top:2.5rem">Renderings are artist's concepts only and may not reflect final construction details, finishes or landscaping. Specifications, pricing and availability are subject to change without notice. E.&amp;O.E.</p>
     </div>
   </section>

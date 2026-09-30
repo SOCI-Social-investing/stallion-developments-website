@@ -1,37 +1,35 @@
 ---
 import { url } from "../lib/url";
+import { communities } from "../data/communities";
 ---
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
         <a class="brand" href={url()}>Stallion<em>Developments</em></a>
-        <p>Premium new homes and development opportunities across Ontario, from the Heart of Muskoka to Prince Edward County and Waterloo Region.</p>
+        <p>New homes in Bracebridge, Muskoka, Kitchener and Prince Edward County, designed and built by an engineer-led Ontario team. Tarion-registered builder.</p>
         <p class="tagline">Built with intent.</p>
       </div>
       <div class="footer-col">
         <h3>Communities</h3>
         <ul>
-          <li><a href={url("communities/maple-place-bracebridge/")}>Maple Place, Bracebridge</a></li>
-          <li><a href={url("communities/anglo-street-bracebridge/")}>Anglo Street, Bracebridge</a></li>
-          <li><a href={url("communities/chicopee-heights-kitchener/")}>Chicopee Heights, Kitchener</a></li>
-          <li><a href={url("communities/lady-of-the-woods-prince-edward-county/")}>Lady of the Woods, Prince Edward County</a></li>
+          {communities.map((c) => <li><a href={url(`communities/${c.slug}/`)}>{c.name}, {c.town.replace(", Muskoka", "")}</a></li>)}
         </ul>
       </div>
       <div class="footer-col">
         <h3>Company</h3>
         <ul>
-          <li><a href={url("invest/")}>Invest With Us</a></li>
           <li><a href={url("team/")}>Our Team</a></li>
-          <li><a href={url("contact/")}>Contact</a></li>
+          <li><a href={url("investors/")}>Investors</a></li>
+          <li><a href={url("register/")}>Register / Contact</a></li>
           <li><a href={url("legal/")}>Legal</a></li>
           <li><a href="mailto:info@stalliondevelopments.com">info@stalliondevelopments.com</a></li>
-          <!-- CONFIRM: phone, office address -->
+          <!-- CONFIRM: sales phone number -->
         </ul>
       </div>
       <div class="footer-col footer-news">
         <h3>Be first to know</h3>
-        <p>New releases, floor plans and construction updates, straight to your inbox.</p>
+        <p>Be first to hear about new homes. Floor plans, pricing and release dates, a few times a year. No spam.</p>
         <form class="news-form" novalidate="false">
           <label class="visually-hidden" for="news-email">Email</label>
           <input id="news-email" type="email" name="email" placeholder="Email address" required />
@@ -41,8 +39,8 @@ import { url } from "../lib/url";
       </div>
     </div>
     <div class="footer-legal">
-      <p>&copy; 2026 Stallion Developments. All rights reserved.<!-- CONFIRM: legal entity name --> Renderings are artist's concepts only and may not reflect final construction, finishes or landscaping. Prices, specifications and availability are subject to change without notice. E.&amp;O.E.</p>
-      <p>Nothing on this website is an offer to sell, or a solicitation of an offer to buy, any security. Any such offer is made only to qualified investors through definitive offering documents. <a href={url("legal/")}>Legal &amp; investor disclaimer</a></p>
+      <p>&copy; 2026 Stallion Developments. All rights reserved.<!-- CONFIRM: legal entity name --> Renderings are artist's concepts and may not show final construction, finishes or landscaping. Prices, specifications and availability may change without notice. E.&amp;O.E.</p>
+      <p>Nothing on this website is an offer to sell, or a request for an offer to buy, any security or mortgage investment. Any such offer is made only to eligible investors through definitive offering documents. <a href={url("legal/")}>Legal &amp; investor disclaimer</a><!-- CONFIRM: counsel to approve this wording (syndicated mortgage rules) --></p>
     </div>
   </div>
 </footer>
