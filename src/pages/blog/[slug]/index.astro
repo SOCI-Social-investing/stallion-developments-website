@@ -1,0 +1,90 @@
+---
+/* One static page per published CMS post, at /blog/<slug>/. The body is the CMS's
+   ready-made contentHtml; it is styled by .article-body in style.css. */
+import Layout from "../../../layouts/Layout.astro";
+import { url, SITE_URL } from "../../../lib/url";
+import { getPublishedPosts, postDate, formatDate, type Post } from "../../../lib/cms";
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props as { post: Post };
+const title = post.meta?.title || post.title;
+// Last resort for posts with no SEO description or excerpt: the opening of the body text
+const ENTITIES: Record<string, string> = { amp: "&", lt: "<", gt: ">", quot: '"', "#39": "'", nbsp: " " };
+const bodyText = post.contentHtml
+  .replace(/<[^>]+>/g, " ")
+  .replace(/&(amp|lt|gt|quot|#39|nbsp);/g, (_, e) => ENTITIES[e])
+  .replace(/\s+/g, " ")
+  .trim();
+const description = post.meta?.description || post.excerpt || (bodyText.length > 160 ? bodyText.slice(0, 157).replace(/\s+\S*$/, "") + "…" : bodyText);
+const pageUrl = `${SITE_URL}/blog/${post.slug}/`;
+const published = postDate(post);
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": `${pageUrl}#article`,
+    headline: post.title,
+    ...(description && { description }),
+    ...(post.heroImage && { image: post.heroImage.url }),
+    datePublished: published,
+    dateModified: post.updatedAt,
+    url: pageUrl,
+    mainEntityOfPage: pageUrl,
+    author: { "@id": `${SITE_URL}/#org` },
+    publisher: { "@id": `${SITE_URL}/#org` },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": `${SITE_URL}/` },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": `${SITE_URL}/blog/` },
+      { "@type": "ListItem", "position": 3, "name": post.title, "item": pageUrl },
+    ],
+  },
+];
+---
+<Layout
+  title={title}
+  description={description}
+  path={`blog/${post.slug}/`}
+  current="blog"
+  ogType="article"
+  ogImage={post.heroImage?.url}
+  schema={schema}
+>
+  <meta slot="head" property="article:published_time" content={published} />
+  <meta slot="head" property="article:modified_time" content={post.updatedAt} />
+
+<main class="page">
+  <article>
+    <header class="article-head">
+      <div class="article-measure">
+        <nav class="breadcrumbs" aria-label="Breadcrumb"><a href={url()}>Home</a><span>/</span><a href={url("blog/")}>Blog</a></nav>
+        <time class="post-date" datetime={published}>{formatDate(published)}</time>
+        <h1>{post.title}</h1>
+        {post.excerpt && <p class="lede">{post.excerpt}</p>}
+      </div>
+      {post.heroImage && (
+        <figure class="article-hero">
+          <img src={post.heroImage.url} alt={post.heroImage.alt || ""} width={post.heroImage.width ?? undefined} height={post.heroImage.height ?? undefined} />
+        </figure>
+      )}
+    </header>
+
+    <div class="article-body article-measure">
+      <Fragment set:html={post.contentHtml} />
+    </div>
+
+    <footer class="article-foot article-measure">
+      <a class="link-arrow back" href={url("blog/")}>All articles</a>
+      <a class="btn btn-solid" href={url("register/")}>Register for pricing</a>
+    </footer>
+  </article>
+</main>
+</Layout>

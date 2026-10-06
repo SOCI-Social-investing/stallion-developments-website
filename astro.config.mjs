@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
+import sitemap from "@astrojs/sitemap";
 
 // BASE_PATH is set by the GitHub Pages workflow from GitHub's own answer
 // ("/stallion-developments-website/" on the project site). Cloudflare Pages and
@@ -16,4 +17,7 @@ export default defineConfig({
   compressHTML: true,
   // tools/*.mjs QA scripts expect the dev/preview server here
   server: { port: 8014 },
+  // Writes sitemap-index.xml + sitemap-0.xml from every built page (blog posts included).
+  // The 404 page is built as /404/ but must not be listed.
+  integrations: [sitemap({ filter: (page) => !/\/404\/?$/.test(new URL(page).pathname) })],
 });

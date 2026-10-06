@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.stalliondevelopments.com/sitemap.xml
+Sitemap: https://www.stalliondevelopments.com/sitemap-index.xml
