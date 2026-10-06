@@ -12,15 +12,17 @@ interface Props {
   /** Path on the production domain, e.g. "communities/" ("" for home) */
   path: string;
   /** Nav item to mark as the current page */
-  current?: "communities" | "why" | "team" | "investors" | "contact";
+  current?: "communities" | "why" | "team" | "investors" | "blog" | "contact";
   ogImage?: string;
+  /** "article" for blog posts */
+  ogType?: "website" | "article";
   /** Extra JSON-LD objects (breadcrumbs, FAQ, people…); the Organization block is always included */
   schema?: object[];
   /** "inner" for regular pages; "film" for a page led by a ScrollFilm (transparent header, no CSS smooth scroll) */
   variant?: "inner" | "film";
 }
 
-const { title, description, path, current, ogImage = "assets/img/maple-exterior.webp", schema = [], variant = "inner" } = Astro.props;
+const { title, description, path, current, ogImage = "assets/img/maple-exterior.webp", ogType = "website", schema = [], variant = "inner" } = Astro.props;
 const canonical = absolute(path);
 
 // Every page (client copy doc, "Structured data"). logo and sameAs are left out until
@@ -57,7 +59,7 @@ const FAVICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' vi
   <link rel="canonical" href={canonical} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content={ogType} />
   <meta property="og:url" content={canonical} />
   <meta property="og:image" content={absolute(ogImage)} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -1,0 +1,73 @@
+---
+/* Blog index: every published post from the CMS, newest first (src/lib/cms.ts). */
+import Layout from "../../layouts/Layout.astro";
+import { url, SITE_URL } from "../../lib/url";
+import { getPublishedPosts, postDate, formatDate } from "../../lib/cms";
+
+const posts = await getPublishedPosts();
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": `${SITE_URL}/` },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": `${SITE_URL}/blog/` },
+    ],
+  },
+];
+---
+<Layout
+  title="Blog | Stallion Developments, Ontario Home Builder"
+  description="News, building updates and advice for buyers from Stallion Developments, an engineer-led Ontario home builder in Bracebridge, Kitchener and Prince Edward County."
+  path="blog/"
+  current="blog"
+  schema={schema}
+>
+
+<main class="page">
+  <section class="page-hero">
+    <div class="wrap">
+      <div>
+        <nav class="breadcrumbs" aria-label="Breadcrumb"><a href={url()}>Home</a><span>/</span>Blog</nav>
+        <span class="eyebrow">Blog</span>
+        <h1>Notes from the build.</h1>
+        <p class="lede">Building updates from our communities, and plain advice for buying a new home in Ontario.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      {posts.length > 0 ? (
+        <ol class="post-list">
+          {posts.map((post) => (
+            <li class:list={["post-item", { "has-media": post.heroImage }]}>
+              <div class="post-item-text">
+                <time class="post-date" datetime={postDate(post)}>{formatDate(postDate(post))}</time>
+                <h2><a href={url(`blog/${post.slug}/`)}>{post.title}</a></h2>
+                {post.excerpt && <p class="post-excerpt">{post.excerpt}</p>}
+                <a class="link-arrow" href={url(`blog/${post.slug}/`)} aria-hidden="true" tabindex="-1">Read article</a>
+              </div>
+              {post.heroImage && (
+                <a class="post-item-media" href={url(`blog/${post.slug}/`)} aria-hidden="true" tabindex="-1">
+                  <img src={post.heroImage.url} alt="" width={post.heroImage.width ?? undefined} height={post.heroImage.height ?? undefined} loading="lazy" />
+                </a>
+              )}
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <div class="blog-empty">
+          <h2>Our first articles are on the way.</h2>
+          <p>In the meantime, see what we're building, or subscribe at the bottom of this page to hear when new homes are released.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-solid" href={url("communities/")}>Explore communities</a>
+            <a class="btn btn-ghost" href={url("register/")}>Register for pricing</a>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+</main>
+</Layout>

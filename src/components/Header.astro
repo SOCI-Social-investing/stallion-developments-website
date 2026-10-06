@@ -3,7 +3,7 @@ import { url } from "../lib/url";
 
 interface Props {
   /** Nav item marked aria-current="page" */
-  current?: "communities" | "why" | "team" | "investors" | "contact";
+  current?: "communities" | "why" | "team" | "investors" | "blog" | "contact";
 }
 const { current } = Astro.props;
 
@@ -14,6 +14,7 @@ const NAV = [
   { key: "why", href: "#why-stallion", label: "Why Stallion" },
   { key: "team", href: "team/", label: "Our Team" },
   { key: "investors", href: "investors/", label: "Investors" },
+  { key: "blog", href: "blog/", label: "Blog" },
   { key: "contact", href: "register/", label: "Contact" },
 ];
 const register = url("register/");

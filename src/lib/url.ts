@@ -5,6 +5,6 @@ const BASE = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 
 export const url = (path = "") => (/^[a-z]+:/i.test(path) ? path : BASE + path.replace(/^\//, ""));
 
-/* Canonical and OG URLs always point at the production domain. */
+/* Canonical and OG URLs always point at the production domain (full URLs, e.g. CMS images, pass through). */
 export const SITE_URL = "https://www.stalliondevelopments.com";
-export const absolute = (path = "") => `${SITE_URL}/${path.replace(/^\//, "")}`;
+export const absolute = (path = "") => (/^[a-z]+:/i.test(path) ? path : `${SITE_URL}/${path.replace(/^\//, "")}`);
