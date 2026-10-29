@@ -226,15 +226,14 @@ function initScrollFilm(root, cfg) {
   });
 
   /* The hero is the section on screen at load. It plays an intro once the
-     first frames are in, then fades out across its own segment. */
+     first frames are in, then fades out between its two data-seg points. */
   const heroSection = root.querySelector('.band-section[data-animation="hero"]');
 
   function playHeroIntro() {
     if (!heroSection) return;
     const q = (sel) => heroSection.querySelectorAll(sel);
     const steps = [
-      [q(".eyebrow"), { y: 14, opacity: 0, duration: 0.6, ease: "power3.out" }],
-      [q(".hero-heading .word"), { yPercent: 115, duration: 1.1, stagger: 0.06, ease: "power4.out" }, "-=0.3"],
+      [q(".hero-heading .word"), { yPercent: 115, duration: 1.1, stagger: 0.06, ease: "power4.out" }],
       [q(".hero-tagline"), { y: 26, opacity: 0, duration: 0.8, ease: "power3.out" }, "-=0.55"],
       [q(".hero-ctas .btn"), { y: 20, opacity: 0, stagger: 0.09, duration: 0.7, ease: "power3.out" }, "-=0.5"],
       [q(".badge-strip"), { opacity: 0, duration: 0.7, ease: "power2.out" }, "-=0.3"],
@@ -263,8 +262,7 @@ function initScrollFilm(root, cfg) {
       const st = sectionState.get(s);
       const inRange = p >= st.enter && p <= st.leave;
       if (s === heroSection) {
-        const h = st.seg;
-        const o = gsap.utils.clamp(0, 1, 1 - (p - (h.p0 + 0.12 * (h.p1 - h.p0))) / (0.65 * (h.p1 - h.p0)));
+        const o = gsap.utils.clamp(0, 1, 1 - (p - st.enter) / (st.leave - st.enter));
         s.style.opacity = o;
         s.classList.toggle("is-active", o > 0.01);
         return;

@@ -23,7 +23,12 @@ const columns = cols ?? (list.length === 3 ? 3 : 4);
         </div>
       ) : (
         <div class="card-media placeholder">
-          <span class="ph-mark">{c.mark}</span>
+          <!-- Placeholder building, redrawn from "Minimal colorful building design" by rawpixel.com on Magnific (used under the Islands Premium plan, so no credit line) -->
+          <svg class="ph-building" viewBox="810 547 1190 786" aria-hidden="true" focusable="false">
+            <polygon class="ph-dark" points="1137,780 1500,547 1500,872 1428,849 1137,957" />
+            <polygon class="ph-mid" points="1500,547 1835,768 1835,983 2000,1036 2000,1333 1428,1333 1428,849 1500,872" />
+            <polygon class="ph-light" points="810,1078 1428,849 1428,1333 810,1333" />
+          </svg>
           <span class="status-label soon"><span class="dot"></span>{c.status}</span>
         </div>
       )}
