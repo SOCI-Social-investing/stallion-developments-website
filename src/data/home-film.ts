@@ -19,9 +19,10 @@ type Ref = [keyof typeof sources, number];
 type Segment = { id: string; units: number } & ({ from: Ref; to: Ref } | { hold: Ref });
 
 /* Original clip frame ranges (0-based): 1:0–36  2:37–73  3:74–110 (4–6, 111–245, no longer played) */
+/* No hold on the finished home: the roof starts lifting on the first scroll, and the
+   hero copy fades over the start of clip1 (its data-seg in index.astro). */
 export const timeline: Segment[] = [
-  { id: "hero",   units: 0.9,  hold: ["film", 0] },                         // frame 1: the finished home
-  { id: "clip1",  units: 1.0,  from: ["film", 0],      to: ["film", 36] },  // frame 2: roof lifts…
+  { id: "clip1",  units: 1.0,  from: ["film", 0],      to: ["film", 36] },  // frame 1 → 2: the finished home, then the roof lifts…
   { id: "hold1",  units: 0.15, hold: ["film", 36] },
   { id: "clip2",  units: 1.0,  from: ["film", 37],     to: ["film", 73] },  // …upper floor strips
   { id: "hold2",  units: 0.1,  hold: ["film", 73] },
@@ -42,5 +43,6 @@ export const timeline: Segment[] = [
 /* Hero + most of clip 1 must be in before the loader lifts */
 export const preload: Ref = ["film", 40];
 
-/* Runway in viewport heights: the pace the old 1600/1150 runway had per unit, over 10.15 units */
-export const length = { desktop: 1030, mobile: 740 };
+/* Runway in viewport heights: the pace the old 1600/1150 runway had per unit, over 9.25 units
+   (1030/740 before the 0.9-unit hero hold was dropped) */
+export const length = { desktop: 940, mobile: 675 };

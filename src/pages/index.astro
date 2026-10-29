@@ -44,14 +44,12 @@ const schema = [
     loader="Stallion"
   >
     <!-- Frame 1 · Exterior (the page's only H1) -->
-    <section class="band-section hero-section is-active" id="top" data-seg="hero:0,hero:1" data-animation="hero">
+    <section class="band-section hero-section is-active" id="top" data-seg="clip1:0,clip1:0.18" data-animation="hero">
       <div class="hero-inner">
-        <span class="eyebrow">Ontario home builder</span>
         <h1 class="hero-heading">
-          <span class="line"><span class="word">New</span> <span class="word">homes</span> <span class="word">in</span></span>
-          <span class="line"><span class="word">Muskoka,</span> <span class="word">built</span> <span class="word">by</span></span>
-          <span class="line"><span class="word">the</span> <span class="word">people</span> <span class="word">who</span></span>
-          <span class="line"><span class="word">design</span> <span class="word">them.</span></span>
+          <span class="line"><span class="word">New</span> <span class="word">homes</span> <span class="word">in</span> <span class="word">Muskoka,</span></span>
+          <span class="line"><span class="word">built</span> <span class="word">by</span> <span class="word">the</span> <span class="word">people</span></span>
+          <span class="line"><span class="word">who</span> <span class="word">design</span> <span class="word">them.</span></span>
         </h1>
         <p class="hero-tagline">Engineer-led, Tarion-registered homes in Bracebridge, Kitchener and Prince Edward County.</p>
         <div class="hero-ctas">
@@ -63,7 +61,7 @@ const schema = [
     </section>
 
     <!-- Frame 2 · The builder (roof lifts, the floors strip back to the framing) -->
-    <section class="band-section" data-seg="clip1:0.15,clip2:0.95" data-animation="slide-left">
+    <section class="band-section" data-seg="clip1:0.18,clip2:0.95" data-animation="slide-left">
       <div class="beat-copy">
         <span class="beat-index beat-eyebrow">Built by builders</span>
         <h2 class="beat-heading">The engineer who plans it is on site while it goes up.</h2>
@@ -77,7 +75,7 @@ const schema = [
       <div class="beat-copy">
         <span class="beat-index beat-eyebrow">Designed for light</span>
         <h2 class="beat-heading">Natural light, in every room.</h2>
-        <p class="beat-body">Big windows on every level, down to the finished lower level.</p>
+        <p class="beat-body">Big windows on every level, all the way down to the finished lower level.</p>
       </div>
       <img class="band-still" src="./frames/bedroom/br_0061.webp" alt="Bright bedroom with large windows in a Maple Place home" loading="lazy" />
     </section>
@@ -133,7 +131,7 @@ const schema = [
           <img src="./assets/img/maple-aerial.webp" alt="Aerial rendering of Maple Place semi-detached homes on Maple Street, Bracebridge" loading="lazy" />
         </div>
         <div class="featured-body">
-          <span class="status-label"><span class="dot"></span>Now selling · Bracebridge, Muskoka</span>
+          <span class="beat-index beat-eyebrow">Now selling · Bracebridge, Muskoka</span>
           <h2>Maple Place: walk-to-downtown living in the heart of Muskoka.</h2>
           <p class="featured-lede">Four semi-detached homes on quiet Maple Street. 3 bedrooms, 2.5 baths and about 1,900 sq ft above ground, plus a finished lower level with its own entrance. Minutes from the falls, the river and downtown Bracebridge.</p>
           <dl class="spec-list">
@@ -158,9 +156,8 @@ const schema = [
     <div class="wrap">
       <div class="split-head">
         <div class="section-head reveal">
-          <span class="eyebrow">Communities</span>
           <h2>Our communities</h2>
-          <p>Four communities, each with a distinct character, and one standard of build quality.</p>
+          <p>Each with its own character, all built to one standard.</p>
         </div>
         <a class="btn btn-ghost reveal" href="./communities/">All communities</a>
       </div>
@@ -178,16 +175,19 @@ const schema = [
       </div>
       <div class="reveal">
         <p>Most developers hire out the hard part. We don't. Stallion Developments is led by a licensed Professional Engineer and Tarion-registered builder, backed by a construction, design and sales team that has delivered $150M+ in projects in Canada and abroad. We control every stage in-house, from land and approvals to construction and sales. That means fewer hand-offs, tighter quality and homes built the way we'd build them for our own families.</p>
-        <p class="accent">Every detail is decided by the people accountable for it.</p>
+        <p>Every detail is decided by the people accountable for it.</p>
       </div>
     </div>
   </section>
 
-  <!-- Investor band: short and low on the page -->
-  <section class="section tight investor-band">
-    <div class="wrap reveal">
-      <p><strong>For investors.</strong> We work with a small group of accredited investors on select projects. <a class="link-arrow" href="./investors/">Learn how we partner</a></p>
-    </div>
+  <!-- Investor band: short and low on the page. The whole band is the link. -->
+  <section class="investor-band">
+    <a class="investor-link" href="./investors/">
+      <div class="wrap reveal">
+        <p><strong>For investors.</strong> We work with a small group of accredited investors on select projects.</p>
+        <span class="link-arrow">Learn how we partner</span>
+      </div>
+    </a>
   </section>
 
   <!-- Closing CTA -->
